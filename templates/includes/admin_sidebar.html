@@ -1,0 +1,105 @@
+{% load static %}
+ <!-- Sidebar Start -->
+ <div class="sidebar pe-4 pb-3">
+  <nav class="navbar bg-light navbar-light">
+      <a href="{% url 'myDashboard' %}" class="navbar-brand mx-4 mb-3">
+          <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>My Admin</h3>
+      </a>
+      <div class="d-flex align-items-center ms-4 mb-4">
+        {% comment %} {% if user_profile %} {% endcomment %}
+          <div class="position-relative">
+            {% if user_profile.profile_picture %}
+            <img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="" style="width: 40px; height: 40px;">
+             {% else %}
+             <img class="rounded-circle" src="{% static 'myadmin/img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+              {% endif %} 
+              <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div> 
+            </div>
+          <div class="ms-3">
+              <h6 class="mb-0">{{user.first_name}}</h6>
+              <span>Admin</span>
+          </div>
+      </div>
+      <div class="navbar-nav w-100">
+          <a href="{% url 'myDashboard' %}" class="nav-item nav-link {% if request.path == '/myadmin/dashboard/' or  request.path == '/myadmin/' %}active{% endif %}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle {% if request.path == '/myadmin/applicant-list/' or  request.path == '/myadmin/job-list/' or  request.path == '/myadmin/category-list/' %}active{% endif %}" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Jobs</a>
+              <div class="dropdown-menu bg-transparent border-0">
+                  <a href="{% url 'add_country' %}" class="dropdown-item">Country</a>
+                  <a href="{% url 'add_state' %}" class="dropdown-item">State</a>
+                  <a href="{% url 'add_city' %}" class="dropdown-item">City</a>
+                  <a href="{% url 'add_sector' %}" class="dropdown-item">Sector</a>
+                  <a href="{% url 'company_list' %}" class="dropdown-item">Company List</a>
+                  <a href="{% url 'add_jobtype' %}" class="dropdown-item">Job Type</a>
+                  <a href="{% url 'add_workmode' %}" class="dropdown-item">Work  Mode</a>
+                  <a href="{% url 'add_jobcategory' %}" class="dropdown-item">Job Category</a>
+                  <a href="{% url 'add_jobrole' %}" class="dropdown-item">Job Role</a>
+                  <a href="{% url 'add_skill' %}" class="dropdown-item">Skill</a>
+                  <a href="{% url 'add_education' %}" class="dropdown-item">Education</a>
+                  <a href="{% url 'add_experience' %}" class="dropdown-item">Experience</a>
+                  <a href="{% url 'add_position' %}" class="dropdown-item">Position</a>
+                  <a href="{% url 'job_list' %}" class="dropdown-item">Job Post List</a>
+                  <a href="{% url 'applicant_list' %}" class="dropdown-item">Applicants List</a>
+                  <a href="{% url 'add_jobpost' %}" class="dropdown-item">Add Job Post</a>
+              </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle {% if request.path == '/myadmin/add-services/' or  request.path == '/myadmin/services-list/' %}active{% endif %}" data-bs-toggle="dropdown"><i class="fa fa-server me-2"></i>Services</a>
+            <div class="dropdown-menu bg-transparent border-0">
+                <a href="{% url 'add_services' %}" class="dropdown-item">Add Sevices</a>
+                <a href="{% url 'maservices_list' %}" class="dropdown-item">Services List</a>
+                <a href="{% url 'add_services_detail' %}" class="dropdown-item">Add Services Details</a>
+                <a href="{% url 'maservices_detail_list' %}" class="dropdown-item">Services Detail List</a>
+            </div>
+          </div>
+          
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle {% if request.path == '/myadmin/edit-banner/' or  request.path == '/myadmin/edit-home/' %}active{% endif %}" data-bs-toggle="dropdown"><i class="fa fa-home"></i>Home</a>
+            <div class="dropdown-menu bg-transparent border-0">
+                <a href="{% url 'edit_banner' %}" class="dropdown-item">Hero Banner</a>
+                <a href="{% url 'edit_home' %}" class="dropdown-item">Home Info</a>
+                <a href="{% url 'edit_knowus'%}" class="dropdown-item">Know Us</a>
+                <a href="{% url 'edit_overview'%}" class="dropdown-item">Overview</a>
+                <a href="{% url 'edit_counter' %}" class="dropdown-item">Counter</a>
+            </div>
+          </div>
+
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle {% if request.path == '/myadmin/edit-about/' or  request.path == '/myadmin/edit-specialty/' %}active{% endif %}" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+            <div class="dropdown-menu bg-transparent border-0">
+                <a href="{% url 'edit_about' %}" class="dropdown-item">About</a>
+                <a href="{% url 'edit_specialty' %}" class="dropdown-item">Specialty</a>
+                <a href="{% url 'team_list' %}" class="dropdown-item">Teams</a>
+                <a href="{% url 'testimonial_list' %}" class="dropdown-item">Testimonials</a>
+                <a href="{% url 'client_list' %}" class="dropdown-item">Clients</a>
+                <a href="{% url 'edit_contact' %}" class="dropdown-item">Edit Contact</a>
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle {% if request.path == '/myadmin/authors/' or  request.path == '/myadmin/category/' or  request.path == '/myadmin/posts/'%}active{% endif %}" data-bs-toggle="dropdown"><i class="fas fa-blog"></i>Blog</a>
+            <div class="dropdown-menu bg-transparent border-0">
+                <a href="{% url 'category_list' %}" class="dropdown-item">Category</a>
+                <a href="{% url 'post_list' %}" class="dropdown-item">Posts</a>
+                <a href="{% url 'author_list' %}" class="dropdown-item">Authors</a>
+            </div>
+          </div>
+           <a href="{% url 'enquiry_list' %}" class="nav-item nav-link {% if request.path == '/myadmin/enquiry/' %}active{% endif %}"><i class="fas fa-bell me-2"></i>Enquiry</a>
+          <a href="{% url 'feedback_list' %}" class="nav-item nav-link {% if request.path == '/myadmin/feedback/' %}active{% endif %}"><i class="fas fa-envelope me-2"></i>Feedback</a>
+    
+         <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle {% if request.path == '/myadmin/edit-general/' or  request.path == '/myadmin/update-pages/' or  request.path == '/myadmin/script/' or  request.path == '/myadmin/general/' or  request.path == '/myadmin/edit-profile/' or  request.path == '/myadmin/change-password/' %}active{% endif %}" data-bs-toggle="dropdown"><i class="fas fa-wrench me-2"></i>Settings</a>
+            <div class="dropdown-menu bg-transparent border-0">
+                {% comment %} <a href="{% url 'footerw1' %}" class="dropdown-item">Widgets</a>
+                <a href="{% url 'maabout_list' %}" class="dropdown-item">Pages</a> {% endcomment %}
+                <a href="{% url 'edit_bgbanner' %}" class="dropdown-item">Page Bgbanner</a>
+                <a href="{% url 'edit_general' %}" class="dropdown-item">General</a>
+                <a href="{% url 'edit_profile' %}" class="dropdown-item">Edit Profile</a>
+                <a href="{% url 'emailsetup' %}" class="dropdown-item">Email Setup</a>
+                <a href="{% url 'change_password' %}" class="dropdown-item">Change Password</a>
+            </div>
+          </div>
+          <a href="{% url 'logout' %}" class="nav-item nav-link"><i class="fas fa-sign-out-alt me-2" style="color:red"></i>Logout</a>
+      </div>
+  </nav>
+</div>
+<!-- Sidebar End -->

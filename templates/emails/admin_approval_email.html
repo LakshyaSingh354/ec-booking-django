@@ -1,0 +1,13 @@
+{% autoescape off %}
+
+Hi {{user.first_name}},
+
+{% if is_approved %}
+Congratulations! Your Worldtrado has been approved by our admin team. --Worldtrado B2B Portal
+{% else %}
+We're sorry! You are not eligible for publishing your product list on our portal. For more details, please contact support@worldtrado.com. --WorldTrado
+{% endif %}
+
+
+
+{% endautoescape %}

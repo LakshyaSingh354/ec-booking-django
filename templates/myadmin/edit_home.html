@@ -1,0 +1,98 @@
+{% extends 'mbase.html' %}
+{% block title %}Edit Home Page{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Update Home Page</h6>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'edit_home'%}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                  <div class="col-md-12">
+                      <label for="page_name" class="form-label">Page Name</label>
+                      {{ form.page_name}}
+                    </div>
+                    <div class="col-12">
+                      <label for="meta_title" class="form-label">Meta Title</label>
+                      {{ form.meta_title}}
+                    </div>
+                    <div class="col-12">
+                      <label for="meta_description" class="form-label">Meta Description</label>
+                      {{ form.meta_description}}
+                    </div>
+                    <div class="col-12">
+                      <label for="meta_keywords" class="form-label">Meta Keywords</label>
+                      {{ form.meta_keywords}}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="brand_title" class="form-label">Brand Title</label>
+                        {{ form.brand_title}}
+                      </div>
+                    <div class="col-md-12">
+                      <label for="section1_subtitle" class="form-label">Section1 Subtitle</label>
+                      {{ form.section1_subtitle}}
+                    </div>
+                      <div class="col-md-12">
+                        <label for="section1_title" class="form-label">Section1 Title</label>
+                        {{ form.section1_title}}
+                      </div>
+                      <div class="col-md-12">
+                        <label for="section5_subtitle" class="form-label">Section5 Subtitle</label>
+                        {{ form.section5_subtitle}}
+                      </div>
+                    <div class="col-md-12">
+                      <label for="section5_title" class="form-label">Section5 Title</label>
+                      {{ form.section5_title}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="section5_button" class="form-label">Section5 Button</label>
+                      {{ form.section5_button}}
+                    </div>
+                      <div class="col-md-12">
+                        <label for="team_subtitle" class="form-label">Team Subtitle</label>
+                        {{ form.team_subtitle}}
+                      </div>
+                      <div class="col-md-12">
+                        <label for="team_title" class="form-label">Team Title</label>
+                        {{ form.team_title}}
+                      </div>
+                    <div class="col-md-12">
+                      <label for="team_description" class="form-label">Team description</label>
+                      {{ form.team_description}}
+                    </div>
+                    <div class="col-md-12">
+                      <td><img class="rounded flex-shrink-0" src="{{home.testimonial_img.url}}" alt="" style="width: 60px; height: auto;"></td>
+                      <br/>
+                      <label for="testimonial_img" class="form-label">Testimonial Img</label>
+                      {{ form.testimonial_img}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="blog_subtitle" class="form-label">Blog Subtitle</label>
+                      {{ form.blog_subtitle}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="blog_title" class="form-label">Blog Title</label>
+                      {{ form.blog_title}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="blog_description" class="form-label">Blog Description</label>
+                      {{ form.blog_description}}
+                    </div>
+                     <div class="col-12">
+                        <label for="status" class="form-label">Status</label>
+                        {{ form.status}}
+                     </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

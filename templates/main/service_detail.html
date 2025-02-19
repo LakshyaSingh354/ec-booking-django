@@ -1,0 +1,230 @@
+{% extends 'mainbase.html' %}
+{% block title %} {{single_service.service_name}} {% endblock %}
+{% load static %}
+{% block content %}
+<!-- main-area -->
+<main class="fix">
+
+    <!-- breadcrumb-area -->
+    {% if banner%}
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{banner.bg_banner.url}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">{{single_service.service_name}}</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'services' %}">Services</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{single_service.service_name}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-shape-wrap">
+            <img src="{% static 'img/images/breadcrumb_shape01.png' %}" alt="">
+            <img src="{% static 'img/images/breadcrumb_shape02.png' %}" alt="">
+        </div>
+    </section>
+    {% else %}
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{% static 'img/bg/breadcrumb_bg.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">{{single_service.service_name}}</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'services' %}">Services</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{single_service.service_name}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-shape-wrap">
+            <img src="{% static 'img/images/breadcrumb_shape01.png' %}" alt="">
+            <img src="{% static 'img/images/breadcrumb_shape02.png' %}" alt="">
+        </div>
+    </section>
+    {% endif %}
+    <!-- breadcrumb-area-end -->
+
+
+    <!-- services-details-area -->
+    <section class="services-details-area pt-120 pb-120">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-71 order-0 order-lg-2">
+                    {% include 'includes/alerts.html' %}
+                    <div class="services-details-wrap">
+                        <div class="services-details-thumb">
+                            {% if single_service.service_detail.services_img%}
+                            <img src="{{single_service.service_detail.services_img.url}}" alt="">
+                            {% else %}
+                            <img src="{% static 'img/services/services_details03.jpg' %}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="services-details-content">
+                            <h2 class="title">{{single_service.service_detail.main_title}}</h2>
+                            <p>{{single_service.service_detail.description|safe}}</p>
+                            <div class="sd-inner-wrap sd-inner-wrap-three">
+                                <div class="row align-items-center">
+                                    <div class="col-43">
+                                        <div class="services-details-list-two">
+                                            <ul class="list-wrap">
+                                                <li>
+                                                    <div class="icon">
+                                                        {% if single_service.service_detail.services1_flaticon%}
+                                                        <i class="{{single_service.service_detail.services1_flaticon}}"></i>
+                                                        {% else %}
+                                                        <i class="flaticon-piggy-bank"></i>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="content">
+                                                        <h5 class="title">{{single_service.service_detail.services1_name}}</h5>
+                                                        <p>{{single_service.service_detail.services1_content|safe}}</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="icon">
+                                                        {% if single_service.service_detail.services2_flaticon%}
+                                                        <i class="{{single_service.service_detail.services2_flaticon}}"></i>
+                                                        {% else %}
+                                                        <i class="flaticon-calculator"></i>
+                                                        {% endif %} 
+                                                    </div>
+                                                    <div class="content">
+                                                        <h5 class="title">{{single_service.service_detail.services2_name}}</h5>
+                                                        <p>{{single_service.service_detail.services2_content|safe}}</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-57">
+                                        <div class="content">
+                                            <h3 class="title-two">{{single_service.service_detail.title_two}}</h3>
+                                            <p>{{single_service.service_detail.title_two_content|safe}}</p>
+                                            <ul class="list-wrap">
+                                                <li><img src="{% static 'img/icons/check_icon.svg' %}" alt="">{{single_service.service_detail.list_wrap1}}</li>
+                                                <li><img src="{% static 'img/icons/check_icon.svg' %}" alt="">{{single_service.service_detail.list_wrap2}}</li>
+                                                <li><img src="{% static 'img/icons/check_icon.svg' %}" alt="">{{single_service.service_detail.list_wrap3}}</li>
+                                                <li><img src="{% static 'img/icons/check_icon.svg' %}" alt="">{{single_service.service_detail.list_wrap4}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="industrial-working-wrap">
+                                <h2 class="title-two">{{single_service.service_detail.title_three}}</h2>
+                                <p class="info-one">{{single_service.service_detail.info_one|safe}}</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {% if single_service.service_detail.img_one%}
+                                        <img src="{{single_service.service_detail.img_one.url}}" alt="">
+                                        {% else %}
+                                         <p>ff</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% if single_service.service_detail.img_two%}
+                                        <img src="{{single_service.service_detail.img_two.url}}" alt="">
+                                        {% else %}
+                                         <p>ff</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <p class="info-two">{{single_service.service_detail.info_two|safe}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-29">
+                    <aside class="services-sidebar">
+                        <div class="services-widget">
+                            <h4 class="sw-title">Our Services</h4>
+                            <div class="services-cat-list">
+                                <ul class="list-wrap">
+                                     {% for srv in service %}
+                                      <li><a href="{{srv.get_url}}">{{srv.service_name}}</a> </li>
+                                     {% endfor %} 
+                                    {% comment %} <li class="active"><a href="#">business Analysis <i class="flaticon-right-arrow"></i></a></li> {% endcomment %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% comment %} <div class="services-widget">
+                            <h4 class="sw-title">Brochure</h4>
+                            <div class="services-brochure-wrap">
+                                <p>when an unknown printer took ga lley offer typey anddey.</p>
+                                <a href="{% static '' %}img/services/services_details01.jpg" target="_blank" download class="download-btn"><i class="far fa-file-pdf"></i>PDF. Download</a>
+                                <a href="{% static '' %}img/services/services_details01.jpg" target="_blank" download class="download-btn"><i class="far fa-file-alt"></i>DOC. Download</a>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="services-widget services-sidebar-contact">
+                            <h4 class="title">If You Need Any Help Contact With Us</h4>
+                            {% if genlt%}
+                            <a href="tel:91{{genlt.phone_no1}}"><i class="flaticon-phone-call"></i>+91-{{genlt.phone_no1|safe}}</a>
+                            {% else %}
+                            <a href="tel:917977515433"><i class="flaticon-phone-call"></i>+91-7977515433</a>
+                            {% endif %}
+                        </div>
+                        <div class="services-widget">
+                            <h4 class="sw-title">Book a Consultation</h4>
+                            <!-- <div class="services-widget-form">
+                                <form action="{% url 'inquiry' %}" method="POST" enctype="multipart/form-data">
+                                 {% csrf_token %}
+                                    <div class="form-grp">
+                                        {% if user.is_authenticated %}
+                                        <input type="hidden" name="user_id" value="{{user.id}}">
+                                        {% else %}
+                                        <input type="hidden" name="user_id" value="0">
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="hidden" name="services_id" value="{{single_service.id}}">
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="hidden" name="services_url" value="{{single_service.slug}}">
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="hidden" name="services_title" class="form-control" value="{{single_service.service_name}}" readonly>
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="text" name ="full_name" placeholder="Your Name" required>
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="email" name ="email" placeholder="E-mail Address" required>
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="text"  name ="phone"  placeholder="Phone" required> 
+                                    </div>
+                                    <div class="form-grp">
+                                        <textarea name="message" placeholder="Type Your Message"></textarea>
+                                    </div> -->
+                                    <a href="/next/events/{{single_service.service_name}}"><button class="submit-btn">Book</button></a>
+                                </form>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services-details-area-end -->>
+</main>
+<!-- main-area-end -->
+{% block js %}
+<script>
+    setTimeout(function () {
+        $('.alert').fadeOut('fast');
+    }, 5000);
+</script>
+{% endblock js %}
+
+{% endblock %}

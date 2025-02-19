@@ -1,0 +1,75 @@
+{% extends 'mbase.html' %}
+{% block title %}Counter{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Edit Counter</h6>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'edit_counter'%}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                   <div class="col-md-12">
+                      <label for="heading_name" class="form-label">Name</label>
+                      {{ form.name}}
+                    </div>
+                      <div class="col-md-6">
+                        <label for="counter_item1" class="form-label">Counter Item1</label>
+                        {{ form.counter_item1}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="data_count1" class="form-label">Data Count1</label>
+                        {{ form.data_count1}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="counter_item2" class="form-label">Counter Item2</label>
+                        {{ form.counter_item2}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="data_count2" class="form-label">Data Count2</label>
+                        {{ form.data_count2}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="counter_item3" class="form-label">Counter Item3</label>
+                        {{ form.counter_item3}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="data_count3" class="form-label">Data Count3</label>
+                        {{ form.data_count3}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="counter_item4" class="form-label">Counter Item4</label>
+                        {{ form.counter_item4}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="data_count4" class="form-label">Data Count4</label>
+                        {{ form.data_count4}}
+                      </div>
+                      
+                     <div class="col-12">
+                        <label for="status" class="form-label">Status</label>
+                        {{ form.status}}
+                     </div>
+                    <div class="col-12">
+                        {{form.media}}
+                      <button type="submit" class="btn btn-primary">Update</button>
+                      <ul class="errorlist">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <li style="color: red;">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

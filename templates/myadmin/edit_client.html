@@ -1,0 +1,47 @@
+{% extends 'mbase.html' %}
+{% block title %}Edit Client{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <h6 class="mb-4">Edit Client</h6>
+                  <a href="{% url 'client_list' %}" class="btn btn-primary">Back</a>
+                </div>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'edit_client' myclient.id%}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                  <div class="col-md-12">
+                      <label for="client_name" class="form-label">Client Name</label>
+                      {{ form.client_name}}
+                    </div>
+                    <div class="col-md-12">
+                        <td><img class="rounded flex-shrink-0" src="{{client.client_Logo.url}}" alt="" style="width: 100px; height: auto;"></td>
+                        <br/>
+                      <label for="client_Logo" class="form-label">Client Logo</label>
+                      {{ form.client_Logo}}
+                    </div>
+                      <div class="col-md-12">
+                        <label for="client_website" class="form-label">Client website</label>
+                        {{ form.client_website}}
+                      </div>
+                     <div class="col-12">
+                        <label for="status" class="form-label">Status</label>
+                        {{ form.status}}
+                     </div>
+  
+                    <div class="col-12">
+                        {{form.media}}
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

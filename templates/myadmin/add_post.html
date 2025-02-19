@@ -1,0 +1,66 @@
+{% extends 'mbase.html' %}
+{% block title %}Add Post{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <h6 class="mb-4">Add Post</h6>
+                  <a href="{% url 'post_list' %}" class="btn btn-primary">Back</a>
+               </div>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'add_post' %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                    <div class="col-md-12">
+                      <label for="title" class="form-label">Post Title</label>
+                      {{ form.title}}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="title_tag" class="form-label">Title Tag</label>
+                        {{ form.title_tag}}
+                     </div>
+                     <div class="col-md-6">
+                        <label for="category" class="form-label">Category</label>
+                        {{ form.category}}
+                     </div>
+                     <div class="col-md-6">
+                        <label for="image" class="form-label">Post Image</label>
+                        {{ form.image}}
+                     </div>
+                    <div class="col-12">
+                      <label for="content" class="form-label">Content</label>
+                      {{ form.content}}
+                   </div>
+                   <div class="col-md-12">
+                    <label for="author" class="form-label">Author</label>
+                    {{ form.author}}
+                  </div>
+                 
+                  <div class="col-md-12">
+                    <label for="status" class="form-label">Status</label>
+                    {{ form.status}}
+                  </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Add Post</button>
+                      <ul class="errorlist">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <li style="color: red;">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {{ form.media}}
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

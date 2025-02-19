@@ -1,0 +1,41 @@
+{% extends 'mbase.html' %}
+{% block title %}Product List{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Our Product List</h6>
+            <a href="{% url 'add_product' %}">Add Product</a>
+        </div>
+        <div class="table-responsive">
+            {% include 'includes/alerts.html' %}
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">ID</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{product.id}}</td>
+                        <td><img class="rounded flex-shrink-0" src="{{product.product_image.url}}" alt="" style="width: 100px; height: 60px;"></td>
+                        <td>{{product.product_name}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_product' product.id%}" >edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_product' product.id%}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

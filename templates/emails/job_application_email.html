@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" lang="en">
+<html>
+<head>
+    <title>Job Application</title>
+    <link rel="stylesheet" type="text/css" hs-webfonts="true" href="https://fonts.googleapis.com/css?family=Lato|Lato:i,b,bi">
+    <meta property="og:title" content="Email template">  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <style type="text/css">
+      #email {
+        margin: auto;
+        width: 600px;
+        background-color:#ffffff;
+      }  
+      .activate-btn{
+        font: inherit;
+        background-color: #C33332;
+        border: none;
+        padding: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 900;
+        border-radius: 5px; 
+        text-decoration: none;
+      }      
+    </style>    
+</head>
+<body bgcolor="#F5F8FA" style="width: 100%; margin: auto 0; padding:0; font-family:Lato, sans-serif; font-size:16px; color:#33475B; word-break:break-word">
+    <div id="email">
+      <table role="presentation" width="100%" style="background-color:#EAF0F6;">
+        <tr>
+            <td  align="center" style="padding: 15px 15px; color: #ffffff;">
+                <img alt="Logo" src="https://consulting.rasrila.com/media/logo/logo.png" width="170px" align="middle">
+            </td>
+        </tr>
+      </table>  
+    <h2 >Job Application for {{ job_name }}</h2>
+
+    <p><strong>Name:</strong> {{ first_name }} {{ last_name }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+    <p><strong>Gender:</strong> {{ gender }}</p>
+    <p><strong>Phone No:</strong> {{ phone }}</p>
+    <p><strong>Qualification:</strong> {{ qualification }}</p>
+    <p><strong>Employee Type:</strong> {{ employee_type }}</p>
+    <p><strong>Experience:</strong> {{ experience }}</p>
+    <p><strong>Skills:</strong> {{ skills }}</p>
+    <p><strong>Position:</strong> {{ position }}</p>
+    <p><strong>Relocated:</strong> {{ relocated }}</p>
+    <p><strong>Gender:</strong> {{ gender }}</p>
+     <p><strong>Country:</strong> {{ country }}</p>
+    <p><strong>State:</strong> {{ state }}</p>
+    <p><strong>City:</strong> {{ city }}</p>
+    <p><strong>Address:</strong> {{ address }}</p>
+    <p><strong>Applicant Location:</strong> {{ location }}</p>
+    {% if last_company %}
+    <p><strong>Last Company Name:</strong> {{ last_company }}</p>
+    {% else %}
+    <p><strong>Last Company Name:</strong> Not Found</p>
+    {% endif %}
+    {% if last_designation %}
+    <p><strong>Last Company Designation:</strong> {{ last_designation }}</p>
+    {% else %}
+    <p><strong>Last Company Designation:</strong> Not Found</p>
+    {% endif %}
+    {% if current_ctc %}
+    <p><strong>Current CTC:</strong> {{ current_ctc }}</p>
+    {% else %}
+    <p><strong>Current CTC:</strong> Not Found</p>
+    {% endif %}
+    {% if last_ctc %}
+    <p><strong>Last CTC:</strong> {{ last_ctc }}</p>
+    {% else %}
+    <p><strong>Last CTC:</strong> Not Found</p>
+    {% endif %}
+    <p><strong>Cover Letter:</strong> {{ cover_letter }}</p> 
+    <!-- ... and so on for all fields ... -->
+    <table bgcolor="#EAF0F6" width="100%" role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 60px 60px;">
+        <tr>
+          <td>
+            <h2 style="text-align: center;">Resume</h2>
+            <div style="text-align: center;">
+                <a href="http://{{domain}}{{ resume.url }}" class="activate-btn" style="color: #fff;">Download Resume</a>
+            </div>
+          </td> 
+        </tr>
+    </table>
+    <table role="presentation" bgcolor="#0000F3" width="100%">
+        <tr>
+          <td align="center" style="padding: 15px 15px; color: #fff;">
+            <p>© {% now "Y" %} AdvertSneak Consulting, All Rights Reserved.</p>
+            <a href="http://{{domain}}" style="color:#fff;">Visit Website</a>      
+          </td>
+        </tr>
+    </table> 
+</div>
+</body>
+</html>

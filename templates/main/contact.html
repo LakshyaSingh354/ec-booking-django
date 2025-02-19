@@ -1,0 +1,174 @@
+{% extends 'mainbase.html' %}
+{% block title %} Contact Us {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+    .mycontact-info .list-wrap li .icon {
+        font-size: 28px;
+        line-height: 0;
+        color: #070708;
+        margin-top: 3px;
+        margin-right: 12px;
+        
+    }
+</style>
+{% endblock css %}
+{% block content %}
+<!-- main-area -->
+<main class="fix">
+        <!-- breadcrumb-area -->
+        <section class="breadcrumb-area breadcrumb-bg" data-background="{{banner.bg_banner.url}}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb-content">
+                            <h2 class="title">Contact Us</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-shape-wrap">
+                <img src="{% static 'img/images/breadcrumb_shape01.png' %}" alt="">
+                <img src="{% static 'img/images/breadcrumb_shape02.png' %}" alt="">
+            </div>
+        </section>
+        <!-- breadcrumb-area-end -->
+     <!-- contact-area -->
+     <section class="inner-contact-area pt-40 pb-10">
+        <div class="container">
+            <div class="row mb-40">
+                <div class="col-lg-6">
+                    {% comment %} <div class="inner-contact-img">
+                        <img src="{% static 'img/images/contact_img.jpg' %}" alt="">
+                    </div> {% endcomment %}
+                    <div class="inner-contact-info">
+                        <h2 class="title">Get In Touch</h2>
+                        {% comment %} <h2>Our Office Address</h2> {% endcomment %}
+                        <div class="contact-info-item">
+                            <h5 class="title-two">Our Office Address</h5>
+                            {% comment %} <ul class="list-wrap">
+                                <li>100 Wilshire Blvd, Suite 700 Santa <br> Monica, CA 90401, USA</li>
+                                <li>+1 (310) 620-8565</li>
+                                <li>info@gmail.com</li>
+                            </ul> {% endcomment %}
+                            {% if contacts%}
+                            {% for abg in contacts %}
+                            <div class="mycontact-info">
+                                <ul class="list-wrap">
+                                    <li class="d-flex">
+                                        <div class="icon">
+                                            <i class="flaticon-location"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>{{abg.address1|safe}}</p>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex">
+                                        <div class="icon">
+                                            <i class="flaticon-phone-call"></i>
+                                        </div>
+                                        <div class="content">
+                                            <a href="tel:{{abg.phone_no2}}">{{abg.phone_no1|safe}}</a>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex">
+                                        <div class="icon">
+                                            <i class="flaticon-mail"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>{{abg.email1|safe}}</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                            {% else %}      
+                            <div class="mycontact-info">
+                                <ul class="list-wrap">
+                                    <li class="d-flex">
+                                        <div class="icon">
+                                            <i class="flaticon-location"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>Veena Nagar, Mulund (w), Mumbai, Maharashtra</p>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex">
+                                        <div class="icon">
+                                            <i class="flaticon-phone-call"></i>
+                                        </div>
+                                        <div class="content">
+                                            <a href="tel:917977515433">+917977515433</a>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex">
+                                        <div class="icon">
+                                            <i class="flaticon-mail"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>info@advertsneak.com</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="inner-contact-info">
+                        <div class="services-widget-form">
+                            <h5 class="title-two">Request Free Consultation</h2>
+                                {% include 'includes/alerts.html' %}
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-grp">
+                                    {{form.full_name}}
+                                </div>
+                                <div class="form-grp">
+                                    {{form.phone}}
+                                </div>
+                                <div class="form-grp">
+                                    {{form.email}}
+                                </div>
+                                <div class="form-grp">
+                                    {{form.subject}}
+                                </div>
+                                <div class="form-grp">
+                                    {% comment %} <textarea name="message" placeholder="Type Your Message"></textarea> {% endcomment %}
+                                    {{form.message}}
+                                </div>
+                                <button type="submit" class="btn btn-two">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- contact-area-end -->
+
+
+    <!-- contact-map -->
+    <div class="contact-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15073.322515264115!2d72.945982!3d19.1807562!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b8fe34f1a483%3A0x624f10b7e7498754!2sAdvertSneak!5e0!3m2!1sen!2sin!4v1698037589065!5m2!1sen!2sin"  allowfullscreen  loading="lazy"></iframe>
+    </div>
+    <!-- contact-map-end -->
+    </main>
+    <!-- End Main  -->
+
+    {% block js %}
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('fast');
+        }, 5000);
+    </script>
+    {% endblock js %}
+{% endblock %}

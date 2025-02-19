@@ -1,0 +1,52 @@
+{% extends 'mbase.html' %}
+{% block title %}Company{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-light  rounded h-100 p-4">
+                {% include 'includes/alerts.html' %}
+               
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Company  List</h6>
+                    <a href="{% url 'add_company' %}" class="btn btn-primary">Add Company</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+                                <th scope="col">SN</th>
+                                <th scope="col">Company Logo</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Created ON</th>
+                                <th scope="col">Update</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cnt in company %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><img class="rounded flex-shrink-0" src="{{cnt.company_logo.url}}" alt="" style="width: 100px; height: 60px;"></td>
+                                <td>{{cnt.company_name}}</td>
+                                <td>{{cnt.created_on}}</td>
+                                <td><a class="btn btn-sm btn-primary" href="{% url 'edit_company' cnt.id %}">Edit</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_company' cnt.id%}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+</div>
+<!-- Table End -->
+
+
+{% endblock %}    

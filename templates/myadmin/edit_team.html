@@ -1,0 +1,71 @@
+{% extends 'mbase.html' %}
+{% block title %}Edit Team{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-light  rounded h-100 p-4">
+                {% include 'includes/alerts.html' %}
+               
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Edit Team</h6>
+                    <a href="{% url 'team_list' %}" class="btn btn-primary">Back</a>
+                </div>
+                <form class="row g-3 col-xl-10 offset-xl-1" action="{% url 'edit_team' myteam.id%}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}  
+                    <div class="col-md-6">
+                        <label for="team_name" class="form-label">Team Name</label>
+                        {{ form.team_name}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="designation" class="form-label">Designation</label>
+                        {{ form.designation}}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="photo" class="form-label">Photo</label>
+                        {{ form.photo}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="facebook_link" class="form-label">Facebook Link</label>
+                        {{ form.facebook_link}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="twitter_link" class="form-label">Twitter Link</label>
+                        {{ form.twitter_link}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="instagram_link" class="form-label">Instagram Link</label>
+                        {{ form.instagram_link}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pinterest_link" class="form-label">Pinterest Link</label>
+                        {{ form.pinterest_link}}
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <label for="state" class="form-label">Status</label>
+                        {{ form.status}}
+                    </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </div>
+                      <ul class="errorlist">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <li style="color: red;">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    </form>
+            </div>
+            </div>
+        </div>
+</div>
+<!-- Table End -->
+{% endblock %}    

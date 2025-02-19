@@ -1,0 +1,41 @@
+{% extends 'mbase.html' %}
+{% block title %}Services Detail List{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Services Details List</h6>
+            <a href="{% url 'add_services_detail' %}">Add Services Details</a>
+        </div>
+        <div class="table-responsive">
+            {% include 'includes/alerts.html' %}
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">ID</th>
+                        <th scope="col">Services Name</th>
+                        <th scope="col">Services Detail</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in services %}
+                    <tr>
+                        <td>{{service.id}}</td>
+                        <td>{{service.services}}</td>
+                        <td>{{service.main_title}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_services_detail' service.id%}" >edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_services_detail' service.id%}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

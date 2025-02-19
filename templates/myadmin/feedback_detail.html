@@ -1,0 +1,33 @@
+{% extends 'mbase.html' %}
+{% block title %}Feedback Details{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                
+                {% include 'includes/alerts.html' %}
+                  <div class="col-md-12 col-xl-6 offset-xl-3">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Feedback Details</h6>
+                        <a href="{% url 'feedback_list' %}" class="btn btn-primary">Back</a>
+                    </div>
+                     <div class="bg-gray px-3 py-3 text">
+                        <h5 class="text-black">Customer Details</h5>
+                        <div class="text-black"><strong>Date Time: </strong>{{feedback.create_date}}</div>
+                        <div class="text-black"><strong>Customer Name: </strong>{{feedback.full_name}}</div>
+                        <div class="text-black"><strong>Customer Mobile No: </strong>{{feedback.phone}}</div>
+                        <div class="text-black"><strong>Customer Email ID: </strong>{{feedback.email}}</div>
+                        <div class="text-black"><strong>Subject: </strong>{{feedback.subject}}</div>
+                        <div class="text-black"><strong>Message: </strong>{{feedback.message}}</div>
+                     </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

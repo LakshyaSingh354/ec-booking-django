@@ -1,0 +1,56 @@
+{% extends 'mbase.html' %}
+{% block title %}Applicant Details{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                
+                {% include 'includes/alerts.html' %}
+                  <div class="col-md-12 col-xl-6 offset-xl-3">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">{{applicant.job_name}}</h6>
+                        <a href="{% url 'applicant_list' %}" class="btn btn-primary">Back</a>
+                    </div>
+                     <div class="bg-gray px-3 py-3 text" style="background-color:#ffffff;">
+                        <h5 class="text-black">Application ID: {{applicant.id}}</h5>
+                        <h5 class="text-black">Applicant {{applicant.full_name}} Details</h5>
+                        <div class="text-black"><a href="{{ applicant.resume.url }}" class="btn btn-primary btn-sm" style="color: #fff;"> Download Resume</a></div>
+                        <div class="text-black"><strong>Date Time: </strong>{{applicant.created_on}}</div>
+                        <div class="text-black"><strong>Name: </strong>{{applicant.full_name}}</div>
+                        <div class="text-black"><strong>Mobile No: </strong>{{applicant.applicant_phone}}</div>
+                        <div class="text-black"><strong>Email ID: </strong>{{applicant.email}}</div>
+                        <div class="text-black"><strong>Gender: </strong>{{applicant.gender|title}}</div>
+                        <div class="text-black"><strong>Employee Type: </strong>{{applicant.employee_type|title}}</div>
+                        <div class="text-black"><strong>Working Experience: </strong>{{applicant.working_experience|title}}</div>
+                        <div class="text-black"><strong>Qualification: </strong>{{applicant.qualification|title}}</div>
+                        <div class="text-black"><strong>Skills: </strong>{{applicant.skills|title}}</div>
+                        <div class="text-black"><strong>Applied Job Position : </strong>{{applicant.applicant_position|title}}</div>
+                        <div class="text-black"><strong>Relocated: </strong>{{applicant.is_relocated|title}}</div>
+                        {% if applicant.employee_type == 'experienced' %}
+                        <div class="text-black"><strong>Last Company Name: </strong>{{applicant.last_company_name|title}}</div>
+                        <div class="text-black"><strong>Last Company Designation: </strong>{{applicant.last_company_designation|title}}</div>
+                        <div class="text-black"><strong>Current CTC: </strong>{{applicant.current_ctc|title}}</div>
+                        <div class="text-black"><strong>last CTC: </strong>{{applicant.last_ctc|title}}</div>
+                         {% else %}
+                         {% comment %} <p><strong>No previous company details found for fresher.</p> {% endcomment %}
+                         {% endif %}
+                        <div class="text-black"><strong>Applicant Location: </strong>{{applicant.applicant_location|title}}</div>
+                        <div class="text-black"><strong>Applicant Country: </strong>{{applicant.applicant_country|title}}</div>
+                        <div class="text-black"><strong>Applicant State: </strong>{{applicant.applicant_state|title}}</div>
+                        <div class="text-black"><strong>Applicant City: </strong>{{applicant.applicant_city|title}}</div>
+                        <div class="text-black"><strong>Applicant Address: </strong>{{applicant.applicant_address|title}}</div>
+                        <div class="text-black"><strong>Cover Letter: </strong>{{applicant.cover_letter}}</div>
+                       
+                        
+                     </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

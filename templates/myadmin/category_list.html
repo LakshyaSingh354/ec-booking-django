@@ -1,0 +1,39 @@
+{% extends 'mbase.html' %}
+{% block title %}Category List{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light  rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Category List</h6>
+            <a href="{% url 'add_category' %}" class="btn btn-primary">Add Category</a>
+        </div>
+        <div class="table-responsive">
+            {% include 'includes/alerts.html' %}
+            <table id="datatable" class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Sn</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cat in category %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{cat.category_name}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_category' cat.sno%}" >edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_category' cat.sno%}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

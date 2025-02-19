@@ -1,0 +1,89 @@
+{% extends 'mbase.html' %}
+{% block title %}Dashboard{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-line fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Services Enquiry</p>
+                    <h6 class="mb-0">{{ enquiry_count }}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Total Job Post</p>
+                    <h6 class="mb-0">{{ job_count }}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Total Feedback</p>
+                    <h6 class="mb-0">{{ feedback_count }}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Total Applicants</p>
+                    <h6 class="mb-0">{{applicant_count}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sale & Revenue End -->
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-light  rounded h-100 p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Enquiry List</h6>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Services</th>
+                                <th scope="col">Date, Time</th>
+                                <th scope="col">Details</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for enq in enquiry %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{enq.full_name}}</td>
+                                <td>{{enq.phone}}</td>
+                                <td><a href="/services/{{enq.services_url}}/" target="_blank" >{{enq.services_title}}</a></td>
+                                <td>{{enq.create_date}}</td>
+                                <td><a class="btn btn-sm btn-primary" href="{% url 'enquiry_detail' enq.id %}" target="_blank">Read</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_enquiry' enq.id%}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+<!-- Table End -->
+{% endblock %}    

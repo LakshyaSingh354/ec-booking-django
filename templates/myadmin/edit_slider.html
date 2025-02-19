@@ -1,0 +1,56 @@
+{% extends 'mbase.html' %}
+{% block title %}Edit Slider{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Update Slider</h6>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-10 offset-xl-1" action="{% url 'edit_slider' slid.id %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                  <div class="col-md-12">
+                      <label for="slider_name" class="form-label">Slider name</label>
+                      {{ form.slider_name}}
+                    </div>
+                    <div class="col-md-6">
+                      <label for="slider_bg" class="form-label">Slider bg</label>
+                      {{ form.slider_bg}}
+                    </div>
+                    <div class="col-6">
+                      <label for="slider_images" class="form-label">Slider image</label>
+                      {{ form.slider_image}}
+                  </div>
+                  <div class="col-md-6">
+                    <label for="main_title" class="form-label">Main title</label>
+                    {{ form.main_title}}
+                  </div>
+                  <div class="col-md-6">
+                    <label for="view_more_link" class="form-label">Add Url</label>
+                    {{ form.view_more_link}}
+                  </div>
+                  <div class="col-md-12">
+                    <label for="status" class="form-label">status</label>
+                    {{ form.status}}
+                  </div>
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                          Check me out
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

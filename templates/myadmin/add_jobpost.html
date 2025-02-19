@@ -1,0 +1,175 @@
+{% extends 'mbase.html' %}
+{% block title %}Add Job Post{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Add Job Post</h6>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'add_jobpost' %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                    <div class="col-12">
+                      <label for="job_title" class="form-label">Job Title</label>
+                      {{ form.job_title}}
+                    </div>
+                    <div class="col-12">
+                      <label for="description" class="form-label">Job Description</label>
+                      {{ form.description}}
+                    </div>
+                    <div class="col-12">
+                      <label for="company_description" class="form-label">Company Description</label>
+                      {{ form.company_description}}
+                    </div>
+                    <div class="col-12">
+                      <label for="job_location" class="form-label">Job Location</label>
+                      {{ form.job_location}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="salary" class="form-label">Salary</label>
+                      {{ form.salary}}
+                    </div>
+                    <div class="col-md-6">
+                      <label for="experience" class="form-label">Experience</label>
+                      {{ form.experience}}
+                    </div>
+                    <div class="col-md-6">
+                      <label for="website_url" class="form-label">Website url</label>
+                      {{ form.website_url}}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="sector" class="form-label">Sector</label>
+                      {{ form.sector}}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="job_type" class="form-label">Job Type</label>
+                      {{ form.job_type}}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="job_category" class="form-label">Job Category</label>
+                      {{ form.job_category}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="skills_required" class="form-label">Skills Required</label>
+                      {{ form.skills_required}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="company" class="form-label">Company</label>
+                      {{ form.company}}
+                    </div>
+                    <div class="col-md-6">
+                      <label for="work_mode" class="form-label">Work Mode</label>
+                      {{ form.work_mode}}
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Job_role" class="form-label">Job Role</label>
+                      {{ form.Job_role}}
+                    </div>
+                    <div class="col-md-4">
+                      <label for="country" class="form-label">Country</label>
+                      {{ form.country}}
+                    </div>
+                    <div class="col-4">
+                        <label for="state" class="form-label">State</label>
+                        {{ form.state}}
+                    </div>
+                    <div class="col-4">
+                      <label for="city" class="form-label">City</label>
+                      {{ form.city}}
+                    </div>
+                    <div class="col-4">
+                      <label for="education" class="form-label">Education</label>
+                      {{ form.education}}
+                  </div>
+                  <div class="col-4">
+                    <label for="number_of_job" class="form-label">Number of Job</label>
+                    {{ form.number_of_job}}
+                  </div>
+                  <div class="col-4">
+                    <label for="last_date" class="form-label">Last Date</label>
+                    {{ form.last_date}}
+                  </div>
+                  <div class="col-12">
+                    <label for="last_date" class="form-label">Status</label>
+                    {{ form.status}}
+                  </div>
+                    <div class="col-12">
+                      {{form.media}}
+                      <button type="submit" class="btn btn-primary">Add Job Post</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#id_country').change(function () {
+        var country_id = $(this).val();
+        if (country_id) {
+          $.ajax({
+            url: '{% url "get_states" %}',
+            data: {'country_id': country_id},
+            success: function (data) {
+              $('#id_state').html('<option value="">Select State</option>');
+              $.each(data, function (key, value) {
+                $('#id_state').append('<option value="' + value.id + '">' + value.state_name + '</option>');
+              });
+              $('#id_city').html('<option value="">Select City</option>');
+            }
+          });
+        } else {
+          $('#id_state').html('<option value="">Select State</option>');
+          $('#id_city').html('<option value="">Select City</option>');
+        }
+      });
+
+      $('#id_state').change(function () {
+        var state_id = $(this).val();
+        if (state_id) {
+          $.ajax({
+            url: '{% url "get_cities" %}',
+            data: {'state_id': state_id},
+            success: function (data) {
+              $('#id_city').html('<option value="">Select City</option>');
+              $.each(data, function (key, value) {
+                $('#id_city').append('<option value="' + value.id + '">' + value.city_name + '</option>');
+              });
+            }
+          });
+        } else {
+          $('#id_city').html('<option value="">Select City</option>');
+        }
+      });
+
+      $('#id_sector').change(function () {
+        var sector_id = $(this).val();
+        if (sector_id) {
+          $.ajax({
+            url: '{% url "get_job_categories" %}',  // Replace with your endpoint to get job categories
+            data: {'sector_id': sector_id},
+            success: function (data) {
+              $('#id_job_category').html('<option value="">Select Job Category</option>');
+              $.each(data, function (key, value) {
+                $('#id_job_category').append('<option value="' + value.id + '">' + value.category_name + '</option>');
+              });
+            }
+          });
+        } else {
+          $('#id_job_category').html('<option value="">Select Job Category</option>');
+        }
+      });
+
+
+    });
+  </script>
+
+{% endblock js %}
+{% endblock %}    

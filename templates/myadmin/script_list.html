@@ -1,0 +1,35 @@
+{% extends 'mbase.html' %}
+{% block title %}Custom Script{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        {% include 'includes/alerts.html' %}
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Custom Script</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Script Name</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sct in script %}
+                    <tr>
+                        <td>{{sct.script_name}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_script' sct.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Contact Us -->
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

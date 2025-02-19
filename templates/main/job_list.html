@@ -1,0 +1,211 @@
+{% extends 'mainbase.html' %}
+{% block title %} | Jobs {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+    .blog-post-content-two {
+        border: 1px solid #E7E7E7;
+        border-radius: 0 0 10px 10px;
+        padding: 35px 30px;
+        background: var(--tg-white);
+    }
+</style>
+{% endblock css %}
+{% load humanize %}
+{% block content %}
+        <!-- main-area -->
+        <main class="fix">
+
+            <!-- breadcrumb-area -->
+            <section class="breadcrumb-area breadcrumb-bg" data-background="{{banner.bg_banner.url}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="breadcrumb-content">
+                                {% if 'search' in request.path %}
+                                <h2 class="title">Job Search Result</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Search Result</li>
+                                    </ol>
+                                </nav>
+                                  {% else %}
+                               <h2 class="title">Latest Jobs</h2>
+                               <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Jobs</li>
+                                </ol>
+                            </nav>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="breadcrumb-shape-wrap">
+                    <img src="{% static 'img/images/breadcrumb_shape01.png' %}" alt="">
+                    <img src="{% static 'img/images/breadcrumb_shape02.png' %}" alt="">
+                </div>
+            </section>
+            <!-- breadcrumb-area-end -->
+
+            <!-- blog-area -->
+            <section class="blog-area pt-120 pb-120">
+                <div class="container">
+                    <div class="inner-blog-wrap">
+                        <div class="row justify-content-center">
+                            <div class="col-71">
+                                <header class="border-bottom mb-4 pb-3">
+                                    <div class="form-inline">
+                                        <span class="mr-md-auto"><b>{{ job_count }}</b> Job found </span>
+                            
+                                    </div>
+                                </header><!-- sect-heading -->
+                                <div class="blog-post-wrap">
+                                    <div class="row">
+                                        {% include 'includes/alerts.html' %}
+                                        {% if jobs %}   
+                                        {% for job in jobs %}
+                                        <div class="col-md-12">
+                                            <div class="blog-post-item-two">
+                                                <div class="blog-post-content-two">
+                                    
+                                                    <h2 class="title"><a href="{{ job.get_url }}">{{job.job_title}}</a></h2>
+                                                    <div class="blog-meta mb-4">
+                                                        <ul class="list-wrap">
+                                                            <li style="font-size: 15px;color: #004eff;">
+                                                                <i class="fa fa-suitcase"></i>{{job.company}}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="blog-meta">
+                                                        <ul class="list-wrap">
+                                                            <li style="font-size: 15px;color:#000000;"><i class="fas fa-map-marker-alt"></i>{{job.city}}, {{job.state}}, {{job.country}} ({{job.work_mode}})</li>
+                                                            <li style="font-size: 15px;color: #004eff;"><i class="fa fa-clock"></i>{{job.job_type}}</li>
+															<li style="font-size: 15px;color: #000000;"><i class="fa fa-history"></i>{{job.experience}}</li>
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                    <p>{{job.description|safe|truncatechars:180}}</p>
+                                                    <div class="blog-meta">
+                                                        <ul class="list-wrap">
+                                                    
+                                                            <li style="font-size: 15px;color: #004eff;"><i class="far fa-calendar"></i>Posted Date : {{job.created_on|naturaltime}}</li>
+                                                        </ul>
+                                                    </div>
+													<br/>
+													<div class="d-flex align-items-center justify-content-between mb-4">
+                                                       <a href="{{ job.get_url }}" class="btn btn-primary btn-sm">View Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        {% else %}
+                                        <div>
+                                            <h2>No result found. Please try again.</h2>
+                                        </div>
+                                        {% endif %} 
+                                    </div>
+                                    <div class="pagination-wrap mt-30">
+                                        <nav aria-label="Page navigation example">
+                                            {% if jobs.has_other_pages %}
+                                            <ul class="pagination list-wrap">
+                                                {% if jobs.has_previous %}
+                                                <li class="page-item"><a class="page-link" href="?page={{jobs.previous_page_number}}" aria-label="Previous"><i class="fas fa-angle-double-left"></i></a></li>
+                                                {% else %}
+                                                <li class="page-item disabled"><a class="page-link" aria-label="Previous"><i class="fas fa-angle-double-left"></i></a></li>
+                                                {% endif %}
+                                                {% for i in jobs.paginator.page_range %}
+                                                  {% if jobs.number == i %}
+                                                <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                                                {% else %}
+                                                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% if jobs.has_next %}
+                                                <li class="page-item"><a class="page-link" href="?page={{jobs.next_page_number}}" aria-label="Next"><i class="fas fa-angle-double-right"></i></a></li>
+                                                {% else %}
+                                                <li class="page-item disabled"><a class="page-link" aria-label="Next"><i class="fas fa-angle-double-right"></i></a></li>
+                                                {% endif %}
+                                            </ul>
+                                            {% endif %}
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-29">
+                                <aside class="blog-sidebar">
+                                    <div class="sidebar-search">
+                                        <form action="{% url 'search' %}" class="search" method='GET'>
+                                            <input type="text" name="query" placeholder="Search Here Job. . ." required="">
+                                            <button type="submit"><i class="flaticon-search"></i></button>
+                                        </form>
+                                    </div>
+                                    {% comment %} <div class="blog-widget">
+                                        <h4 class="bw-title">Job Sector</h4>
+                                        <div class="bs-cat-list">
+                                            <ul class="list-wrap">
+                                                {% for sector in jobsec %}
+                                                <li><a href="{{ sector.get_url }}">{{ sector.sector_name }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div> {% endcomment %}
+                                    <div class="blog-widget">
+                                        <h4 class="bw-title">Job Search Filter</h4>
+                                        <form action="{% url 'search' %}" method="get">
+                                           <div class="form-group mb-4">
+                                            <select class="form-control search-fields" name="city" required="">
+                                                <option selected="true" disabled="disabled" required="">Select Location</option>
+                                                {% for city in cities %}
+                                                <option value="{{ city.city_name}}">{{ city.city_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                           </div>
+                                           <div class="form-group mb-4">
+                                             <select class="form-control search-fields" name="work_mode">
+                                                 <option selected="true" disabled="disabled">Select Work Mode</option>
+                                                 {% for work_mode in modes %}
+                                                 <option value="{{ work_mode.name}}">{{ work_mode.name }}</option>
+                                                 {% endfor %}
+                                             </select>
+                                           </div>
+                                           <div class="form-group mb-4">
+                                             <select class="form-control search-fields" name="sector">
+                                                 <option selected="true" disabled="disabled">Select Sector</option>
+                                                 {% for sector in sectors %}
+                                                 <option value="{{ sector.sector_name}}">{{sector.sector_name}}</option>
+                                                 {% endfor %}
+                                             </select>
+                                           </div>
+                                           <div class="form-group mb-4">
+                                             <select class="form-control search-fields" name="job_type">
+                                                 <option selected="true" disabled="disabled">Select Job Type</option>
+                                                 {% for type in jobtypes %}
+                                                 <option value="{{ type.name}}">{{type.name}}</option>
+                                                 {% endfor %}
+                                             </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="submit-btn">
+                                                     Search Now
+                                                </button>
+                                            </div>
+
+                                        </form>    
+                                    </div>
+                                  
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- blog-area-end -->
+
+
+        </main>
+        <!-- main-area-end -->      
+{% endblock %}

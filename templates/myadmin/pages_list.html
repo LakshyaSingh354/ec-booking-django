@@ -1,0 +1,66 @@
+{% extends 'mbase.html' %}
+{% block title %}About{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        {% include 'includes/alerts.html' %}
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">About Us</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">ID</th>
+                        <th scope="col">Bg banner</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for abt in about%}
+                    <tr>
+                        <td>{{abt.id}}</td>
+                        <td><img class="rounded flex-shrink-0" src="{{abt.bg_banner.url}}" alt="" style="width: 100px; height: 60px;"></td>
+                        <td>{{abt.title}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_about' abt.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Contact Us -->
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Contact Us</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">ID</th>
+                        <th scope="col">Bg banner</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ckt in contact%}
+                    <tr>
+                        <td>{{ckt.id}}</td>
+                        <td><img class="rounded flex-shrink-0" src="{{ckt.bg_banner.url}}" alt="" style="width: 100px; height: 60px;"></td>
+                        <td>{{ckt.title}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_contact' ckt.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

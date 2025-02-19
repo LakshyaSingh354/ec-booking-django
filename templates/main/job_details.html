@@ -1,0 +1,205 @@
+{% extends 'mainbase.html' %}
+{% block title %} | Jobs {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+    .blog-post-content-two {
+        border: 1px solid #E7E7E7;
+        border-radius: 0 0 10px 10px;
+        padding: 35px 30px;
+        background: #f6f4c3;
+    }
+</style>
+{% endblock css %}
+{% load humanize %}
+{% block content %}
+
+
+        <!-- main-area -->
+        <main class="fix">
+
+            <!-- breadcrumb-area -->
+            <section class="breadcrumb-area breadcrumb-bg" data-background="{{banner.bg_banner.url}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="breadcrumb-content">
+                                <h2 class="title">Job Details</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="{% url 'jobpost' %}">Jobs</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{single_job.job_title}}</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="breadcrumb-shape-wrap">
+                    <img src="{% static 'img/images/breadcrumb_shape01.png' %}" alt="">
+                    <img src="{% static 'img/images/breadcrumb_shape02.png' %}" alt="">
+                </div>
+            </section>
+            <!-- breadcrumb-area-end -->
+
+            <!-- blog-details-area -->
+            <section class="blog-details-area pt-120 pb-120">
+                <div class="container">
+                    <div class="blog-details-wrap">
+                        <div class="row justify-content-center">
+                            <div class="col-71">
+                                <div class="blog-post-wrap">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="blog-post-item-two">
+                                                <div class="blog-post-content-two">
+                                                    <h2 class="title"><a href="blog-details.html">{{single_job.job_title}}</a></h2>
+                                                    <div class="blog-meta mb-4">
+                                                        <ul class="list-wrap">
+                                                            <li style="font-size: 15px;color: #004eff;">
+                                                                <i class="fa fa-suitcase"></i>{{single_job.company}}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="blog-meta">
+                                                        <ul class="list-wrap mb-2">
+                                                            <li style="font-size: 15px;color:#000000;"><i class="fas fa-thumbtack"></i>{{single_job.work_mode}}</li>
+                                                            <li style="font-size: 15px;color: #000000;"><i class="fas fa-money-bill"></i>Pay: {{single_job.salary}}</li>
+                                                            <li style="font-size: 15px;color: #004eff;"><i class="fa fa-clock"></i>{{single_job.job_type}}</li>
+															<li style="font-size: 15px;color: #000000;"><i class="fa fa-history"></i>{{single_job.experience}}</li>
+                                                        </ul>
+                                                        <ul class="list-wrap mb-2">
+                                                            <li style="font-size: 15px;color:#000000;"><i class="fas fa-map-marker-alt"></i>{{single_job.city}}, {{single_job.state}}, {{single_job.country}}</li>
+                                                        </ul>
+                                                    </div>
+                                                    <p>Last date of application in about {{single_job.last_date|naturaltime}}</p>
+                                                    <div class="blog-meta">
+                                                        <ul class="list-wrap">
+                                                            <li><i class="far fa-calendar"></i>Posted: {{single_job.created_on|naturaltime}}</li>
+                                                            <li><i class="far fa-calendar"></i>Last Date: {{single_job.last_date|date:'d F, Y'}}</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="d-flex align-items-center justify-content-between mb-4 mt-30">
+                                                       <a href="{% url 'jobpost' %}" class="btn btn-primary btn-sm">Back</a>
+                                                       <a href="{% url 'apply_job' single_job.slug %}" class="btn btn-primary btn-sm">Apply Now</a>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-details-content">
+                                    <h2 class="title">Job description</h2>
+                                    <p>{{single_job.description|safe}}</p>
+                                    {% comment %} <h6 class="bw-title">Responsibilities:</h6>
+                                    <p>When an unknown printer took a galley of type and scrambled it to make a type specimen bookhas a not only five centuries, but also the leap into electronic typesetting, remaining essentially unchan galley of type and scrambled it to make a type specimen book.</p> {% endcomment %}
+                                    {% comment %} <div class="bd-inner-wrap">
+                                        <div class="row align-items-center">
+                                            
+                                            <div class="col-100">
+                                                <div class="content">
+                                                    <h5 class="bw-title">Skills And Qualications-:</h5>
+                                                    <p>When an unknown printer took a galley type remaining essentially unchan galley of type and scrambled it to make a type specimen book.</p>
+                                                    <ul class="list-wrap">
+                                                        <li><img src="assets/img/icons/check_icon.svg" alt="">Commercial Property Insurance</li>
+                                                        <li><img src="assets/img/icons/check_icon.svg" alt="">Budget Friendly Theme</li>
+                                                        <li><img src="assets/img/icons/check_icon.svg" alt="">Happy Customers</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> {% endcomment %}
+                                    {% comment %} <p>When an unknown printer took a galley of type and scrambled it to make a type specimen bookhas a not only five centuries, but also the leap into electronic typesetting, remaining essentially unchan galley of type and scrambled it to make a type specimen book.</p> {% endcomment %}
+                                    <div class="bd-content-bottom">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-12">
+                                                <h5 class="title">Skills:</h5>
+                                                <div class="bs-tag-list">
+                                                    <ul class="list-wrap">
+                                                        {% for skill in single_job.skills_required.all %}
+                                                        <li><button  class="btn-secondary btn-sm btn-two">{{ skill.skill_name }}</button></li>
+                                                         {% endfor %}
+                                                    </ul>
+                                                </div>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% comment %} <div class="bd-content-bottom">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-7">
+                                                <div class="post-tags">
+                                                    <h5 class="title">Sector:</h5>
+                                                    <ul class="list-wrap">
+                                                        <li><a href="#">HTML</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="blog-post-share">
+                                                    <h5 class="title">Share:</h5>
+                                                    <ul class="list-wrap">
+                                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> {% endcomment %}
+                                </div>
+                                <div class="blog-avatar-wrap mb-65">
+                                    <div class="blog-avatar-info">
+                                        <span class="designation">About company</span>
+                                        <h4 class="name"><a href="#">{{ single_job.company }}</a></h4>
+                                        <div class="logo">
+                                            <img src="{{ single_job.company.company_logo.url }}" alt="img">
+                                        </div>
+                                        <p>{{single_job.company_description}}</p>
+                                        <p><Strong>Address:</Strong> {{ single_job.company.address }}</p> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-29">
+                                <aside class="blog-sidebar">
+                                    <div class="sidebar-search">
+                                        <form action="{% url 'search' %}" class="search" method='GET'>
+                                            <input type="text" name="query" placeholder="Search Here Job. . ." required="">
+                                            <button type="submit"><i class="flaticon-search"></i></button>
+                                        </form>
+                                    </div>
+                                    <div class="blog-widget">
+                                        <h4 class="bw-title">Job Sector</h4>
+                                        <div class="bs-cat-list">
+                                            <ul class="list-wrap">
+                                                {% for sector in jobsec %}
+                                                <li><a href="{{ sector.get_url }}">{{ sector.sector_name }} <span>({{sector.job_set.all.count}})</span></a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="blog-widget">
+                                        <h4 class="bw-title">Skills</h4>
+                                        <div class="bs-tag-list">
+                                            <ul class="list-wrap">
+                                                {% comment %} {% for skill in jobs %} {% endcomment %}
+                                                {% comment %} <li><a href="#">{{single_job.skills_required}}</a></li> {% endcomment %}
+                                                {% for skill in single_job.skills_required.all %}
+                                                <li><a href="#">{{ skill.skill_name }}</a></li>
+                                                 {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- blog-details-area-end -->
+
+
+        </main>
+        <!-- main-area-end -->
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'mbase.html' %}
+{% block title %}Edit Author{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <h6 class="mb-4">Edit Author</h6>
+                  <a href="{% url 'author_list' %}" class="btn btn-primary">Back</a>
+               </div>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'edit_author' author.id%}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                    <div class="col-md-6">
+                      <label for="user" class="form-label">Select User</label>
+                      {{ form.user}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="user_profile" class="form-label">User Profile</label>
+                        {{ form.user_profile}}
+                     </div>
+                     <div class="col-md-6">
+                        <label for="author_name" class="form-label">Author Name</label>
+                        {{ form.author_name}}
+                     </div>
+                     <div class="col-md-6">
+                        <label for="designation" class="form-label">Designation</label>
+                        {{ form.designation}}
+                     </div>
+                    <div class="col-12">
+                      <label for="content" class="form-label">Content</label>
+                      {{ form.content}}
+                   </div>
+                   <div class="col-md-12">
+                    <label for="author" class="form-label">Approved</label>
+                    {{ form.is_approved}}
+                  </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                      <ul class="errorlist">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <li style="color: red;">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {{ form.media}}
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

@@ -1,0 +1,203 @@
+{% extends 'mainbase.html' %}
+{% block title %} | Blog {% endblock %}
+{% load static %}
+{% block content %}
+<!-- main-area -->
+<main class="fix">
+
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{banner.bg_banner.url}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">{{single_post.title}}</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'post' %}">Blog</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{single_post.title}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-shape-wrap">
+            <img src="{% static 'img/images/breadcrumb_shape01.png' %}" alt="">
+            <img src="{% static 'img/images/breadcrumb_shape02.png' %}" alt="">
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+<!-- blog-details-area -->
+<section class="blog-details-area pt-120 pb-120">
+    <div class="container">
+        <div class="blog-details-wrap">
+            <div class="row justify-content-center">
+                <div class="col-71">
+                    <div class="blog-details-thumb">
+                        <img src="assets/img/blog/blog-details01.jpg" alt="">
+                    </div>
+                    <div class="blog-details-content">
+                        <h2 class="title">{{single_post.title}}</h2>
+                        <div class="blog-meta-three">
+                            <ul class="list-wrap">
+                                <li><i class="far fa-calendar"></i>{{single_post.created_on|date:'d F, Y'}}</li>
+                                <li><img src="{{single_post.author.user.userprofile.profile_picture.url}}" alt="" style="width: 30px;"> by <a href="">{{single_post.author.user.first_name}}</a></li>
+                                <li><i class="fas fa-tags"></i> <a href="{{ single_post.category.get_url }}">{{ single_post.category }}</a></li>
+                                <li><i class="flaticon-speech-bubble"></i><a href="blog-details.html">05 Comments</a></li>
+                            </ul>
+                        </div>
+                        <p>{{single_post.content|safe}}</p>
+                        <div class="bd-content-bottom">
+                            <div class="row align-items-center">
+                                <div class="col-md-7">
+                                    <div class="post-tags">
+                                        <h5 class="title">Category:</h5>
+                                        <ul class="list-wrap">
+                                            <li><a href="{{ single_post.category.get_url }}">{{ single_post.category }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="blog-post-share">
+                                        <h5 class="title">Share:</h5>
+                                        <ul class="list-wrap">
+                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-avatar-wrap mb-65">
+                        <div class="blog-avatar-img">
+                            <a href="#"><img src="{{single_post.author.user.userprofile.profile_picture.url}}" alt="img"></a>
+                        </div>
+                        <div class="blog-avatar-info">
+                            <span class="designation">Author</span>
+                            <h4 class="name"><a href="#">{{single_post.author.author_name}}</a></h4>
+                            <p>{{single_post.author.content|safe|truncatechars:180}}</p>
+                        </div>
+                    </div>
+                    {% comment %} <div class="comments-wrap">
+                        <h3 class="comments-wrap-title">02 Comments</h3>
+                        <div class="latest-comments">
+                            <ul class="list-wrap">
+                                <li>
+                                    <div class="comments-box">
+                                        <div class="comments-avatar">
+                                            <img src="{% static '' %}img/blog/comment01.png" alt="img">
+                                        </div>
+                                        <div class="comments-text">
+                                            <div class="avatar-name">
+                                                <h6 class="name">Jessica Rose</h6>
+                                                <span class="date">December 27, 2023</span>
+                                            </div>
+                                            <p>Finanappreciate your trust greatly Our clients choose dentace ducts because know we are the best area Awaitingare really.</p>
+                                            <a href="#" class="reply-btn">Reply</a>
+                                        </div>
+                                    </div>
+                                    <ul class="children">
+                                        <li>
+                                            <div class="comments-box">
+                                                <div class="comments-avatar">
+                                                    <img src="{% static '' %}img/blog/comment02.png" alt="img">
+                                                </div>
+                                                <div class="comments-text">
+                                                    <div class="avatar-name">
+                                                        <h6 class="name">Parker Willy</h6>
+                                                        <span class="date">December 28, 2023</span>
+                                                    </div>
+                                                    <p>Finanappreciate your trust greatly Our clients choose dentace ducts because know we are the best area Awaitingare really.</p>
+                                                    <a href="#" class="reply-btn">Reply</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="comment-respond">
+                        <h3 class="comment-reply-title">Post a comment</h3>
+                        <form action="#" class="comment-form">
+                            <p class="comment-notes">Your email address will not be published. Required fields are marked *</p>
+                            <div class="form-grp">
+                                <textarea name="comment" placeholder="Comment"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-grp">
+                                        <input type="text" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-grp">
+                                        <input type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-grp">
+                                        <input type="url" placeholder="Website">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-grp checkbox-grp">
+                                <input type="checkbox" id="checkbox">
+                                <label for="checkbox">Save my name, email, and website in this browser for the next time I comment.</label>
+                            </div>
+                            <button type="submit" class="submit-btn">Submit Post</button>
+                        </form>
+                    </div> {% endcomment %}
+                </div>
+                <div class="col-29">
+                    <aside class="blog-sidebar">
+                        <div class="sidebar-search">
+                            <form action="{% url 'blogsearch' %}" class="search" method='GET'>
+                                <input type="text" name="query"  placeholder="Search Here. . ." required="">
+                                <button type="submit"><i class="flaticon-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="blog-widget">
+                            <h4 class="bw-title">Categories</h4>
+                            <div class="bs-cat-list">
+                                <ul class="list-wrap">
+                                    {% for i in links %}
+                                    <li><a href="{{ i.get_url }}">{{ i.category_name }} <span>({{i.post_set.all.count}})</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog-widget">
+                            <h4 class="bw-title">Recent Posts</h4>
+                            <div class="rc-post-wrap">
+                                {% for post in recent_posts %}
+                                <div class="rc-post-item">
+                                    <div class="thumb">
+                                        <a href="{{ post.get_url }}"><img src="{{ post.image.url }}" alt=""></a>
+                                    </div>
+                                    <div class="content">
+                                        <span class="date"><i class="far fa-calendar"></i>{{post.created_on|date:'d F, Y'}}</span>
+                                        <h2 class="title"><a href="{{ post.get_url }}">{{post.title|safe|truncatechars:30}}</a></h2>
+                                    </div>
+                                </div>
+                               {% endfor %}
+                                
+                                
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- blog-details-area-end -->
+</main>
+<!-- main-area-end -->
+
+{% endblock %}

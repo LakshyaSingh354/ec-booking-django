@@ -1,0 +1,60 @@
+{% extends 'mainbase.html' %}
+{% block title %} | Search {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+    .blog-post-content-two {
+        border: 1px solid #E7E7E7;
+        border-radius: 0 0 10px 10px;
+        padding: 35px 30px;
+        background: var(--tg-white);
+    }
+</style>
+{% endblock css %}
+{% load humanize %}
+{% block content %}
+        <!-- main-area -->
+        <main class="fix">
+
+            <!-- breadcrumb-area -->
+            <section class="breadcrumb-area breadcrumb-bg" data-background="{{banner.bg_banner.url}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="breadcrumb-content">
+                                <h2 class="title">Latest Job</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Jobs</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="breadcrumb-shape-wrap">
+                    <img src="assets/img/images/breadcrumb_shape01.png" alt="">
+                    <img src="assets/img/images/breadcrumb_shape02.png" alt="">
+                </div>
+            </section>
+            <!-- breadcrumb-area-end -->
+
+            <!-- blog-area -->
+            <section class="blog-area pt-120 pb-120">
+                <div class="container">
+                    <div class="inner-blog-wrap">
+                        <div class="row justify-content-center">
+                            <div class="col-71">
+                                <p>Skills:</p>
+                                    {% comment %} <p>{{ applicant.skills}}</p> {% endcomment %}
+                            </div>
+                    </div>
+                </div>
+            </section>
+            <!-- blog-area-end -->
+
+
+        </main>
+        <!-- main-area-end -->      
+{% endblock %}

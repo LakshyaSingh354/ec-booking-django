@@ -1,0 +1,41 @@
+{% extends 'mbase.html' %}
+{% block title %}Client List{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Client List</h6>
+            <a href="{% url 'add_client' %}">Add Client</a>
+        </div>
+        <div class="table-responsive">
+            {% include 'includes/alerts.html' %}
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">ID</th>
+                        <th scope="col">Client Logo</th>
+                        <th scope="col">Client Name</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <td>{{client.id}}</td>
+                        <td><img class="rounded flex-shrink-0" src="{{client.client_Logo.url}}" alt="" style="width: 200px; height: 70px;"></td>
+                        <td>{{client.client_name}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_client' client.id%}" >edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_client' client.id%}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

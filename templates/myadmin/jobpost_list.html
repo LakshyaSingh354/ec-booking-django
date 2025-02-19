@@ -1,0 +1,52 @@
+{% extends 'mbase.html' %}
+{% block title %}Job Post List{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-light  rounded h-100 p-4">
+                {% include 'includes/alerts.html' %}
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Job Post List</h6>
+                    <a href="{% url 'add_jobpost' %}">Add Jobpost</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+                                <th scope="col">SN</th>
+                                <th scope="col">Job Title</th>
+                                <th scope="col">Experience</th>
+                                <th scope="col">Work Mode</th>
+                                <th scope="col">Date, Time</th>
+                                <th scope="col">Update</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in jobs %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="/jobs/{{job.slug}}/" target="_blank" >{{job.job_title}}</a></td>
+                                <td>{{job.experience}}</td>
+                                <td>{{job.work_mode}}</td>
+                                <td>{{job.created_on}}</td>
+                                <td><a class="btn btn-sm btn-primary" href="{% url 'edit_jobpost' job.id %}" target="_blank">Edit</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_jobpost' job.id%}" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+<!-- Table End -->
+
+
+{% endblock %}  

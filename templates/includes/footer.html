@@ -1,0 +1,162 @@
+{% load static %}
+        <!-- footer-area -->
+        <footer>
+          <div class="footer-area-three">
+              <div class="footer-top-three">
+                  <div class="container">
+                      <div class="row">
+                        {% if genlt%}
+                      
+                        <div class="col-lg-4 col-md-7">
+                              <div class="footer-widget">
+                                  <div class="fw-logo">
+                                      <a href="{% url 'home' %}"><img src="{{genlt.footer_logo.url}}" alt=""></a>
+                                  </div>
+                                  <div class="footer-content">
+                                      <p>{{genlt.meta_description|safe|truncatechars:140}}</p>
+                                      <div class="footer-social footer-social-three">
+                                          <ul class="list-wrap">
+                                              <li><a href="{{genlt.facebook_link}}"><i class="fab fa-facebook-f"></i></a></li>
+                                              <li><a href="{{genlt.twitter_link}}"><i class="fab fa-twitter"></i></a></li>
+                                              <li><a href="{{genlt.instagram_link}}"><i class="fab fa-instagram"></i></a></li>
+                                              <li><a href="{{genlt.linkedin_link}}"><i class="fab fa-linkedin"></i></a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        
+                          {% else %}
+                          <div class="col-lg-4 col-md-7">
+                            <div class="footer-widget">
+                                <div class="fw-logo">
+                                    <a href="{% url 'home' %}"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                                </div>
+                                <div class="footer-content">
+                                    <p>When an unknown printer took a galley of type aawer awtnd scrambled it to make a type specimen book.</p>
+                                    <div class="footer-social footer-social-three">
+                                        <ul class="list-wrap">
+                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          {% endif %}
+
+                          <div class="col-lg-2 col-md-5 col-sm-6">
+                              <div class="footer-widget">
+                                  <h4 class="fw-title">Quick Links</h4>
+                                  <div class="footer-link">
+                                      <ul class="list-wrap">
+                                          <li><a href="{% url 'home' %}">Home</a></li>
+                                          <li><a href="{% url 'about' %}">About Us</a></li>
+                                          <li><a href="{% url 'services' %}">Services</a></li>
+                                          <li><a href="{% url 'jobpost' %}">Jobs</a></li>
+                                          <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-5 col-sm-6">
+                              <div class="footer-widget">
+                                  <h4 class="fw-title">Our Services</h4>
+                                  <div class="footer-link">
+                                      <ul class="list-wrap">
+                                        {% for srv in service %}
+                                        {% if forloop.counter <= 4 %}
+                                          <li><a href="{{srv.get_url}}">{{srv.service_name}}</a></li>
+                                        {%endif%}
+                                        {% endfor %}
+                                          <li><a href="{% url 'services' %}">View More</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-3 col-md-7">
+                              <div class="footer-widget">
+                                  <h4 class="fw-title">Contact</h4>
+                                  {% if genlt%}
+              
+                                  <div class="footer-info">
+                                      <ul class="list-wrap">
+                                          <li>
+                                              <div class="icon">
+                                                  <i class="flaticon-pin"></i>
+                                              </div>
+                                              <div class="content">
+                                                  <p>{{genlt.address|safe}}</p>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="icon">
+                                                  <i class="flaticon-phone-call"></i>
+                                              </div>
+                                              <div class="content">
+                                                  <a href="tel:91{{genlt.phone_no1}}">+91-{{genlt.phone_no1|safe}}</a>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="icon">
+                                                  <i class="flaticon-mail"></i>
+                                              </div>
+                                              <div class="content">
+                                                  <p>{{genlt.email1|safe}}</p>
+                                              </div>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  
+                                   {% else %}
+                                   <div class="footer-info">
+                                    <ul class="list-wrap">
+                                        <li>
+                                            <div class="icon">
+                                                <i class="flaticon-pin"></i>
+                                            </div>
+                                            <div class="content">
+                                                <p>Veena Nagar, Mulund (w), Mumbai, Maharashtra</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon">
+                                                <i class="flaticon-phone-call"></i>
+                                            </div>
+                                            <div class="content">
+                                                <a href="tel:917977515433">+917977515433</a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon">
+                                                <i class="flaticon-clock"></i>
+                                            </div>
+                                            <div class="content">
+                                                <p>Mon – Sat: 8 am – 5 pm, <br> Sunday: <span>CLOSED</span></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                   </div>
+                                   {% endif %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="footer-bottom-three">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="copyright-text-two text-center">
+                                  <p>Copyright © {% now 'Y' %} {{genlt.website_name|safe}} All Right Reserved | Design By :- <a href="https://www.advertsneak.com/" target="_blank">AdvertSneak Technologies</a></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </footer>
+      <!-- footer-area-end -->

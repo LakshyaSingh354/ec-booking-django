@@ -1,0 +1,98 @@
+{% extends 'mbase.html' %}
+{% block title %}Overviews{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Edit Overview</h6>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'edit_overview'%}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                   <div class="col-md-12">
+                      <label for="heading_name" class="form-label">Heading Name</label>
+                      {{ form.heading_name}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="main_title" class="form-label">Main Title</label>
+                      {{ form.main_title}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="main_title" class="form-label">Description</label>
+                      {{ form.description}}
+                    </div>
+                      <div class="col-12">
+                        <td><img class="rounded flex-shrink-0" src="{{overview.mask_img.url}}" alt="" style="width: 100px; height: auto;"></td>
+                        <br/>
+                        <label for="mask_img" class="form-label">Mask Img</label>
+                        {{ form.mask_img}}
+                      </div>
+                      <div class="col-4">
+                        <td><img class="rounded flex-shrink-0" src="{{overview.img_two.url}}" alt="" style="width: 60px; height: 60px;"></td>
+                        <br/>
+                        <label for="knowus" class="form-label">Img two</label>
+                        {{ form.img_two}}
+                      </div>
+                      <div class="col-4">
+                        <td><img class="rounded flex-shrink-0" src="{{overview.bshape_1.url}}" alt="" style="width: 60px; height: 60px;"></td>
+                        <br/>
+                        <label for="bshape_1" class="form-label">Bshape1</label>
+                        {{ form.bshape_1}}
+                      </div>
+                      <div class="col-4">
+                        <td><img class="rounded flex-shrink-0" src="{{overview.bshape_2.url}}" alt="" style="width: 60px; height: 60px;"></td>
+                        <br/>
+                        <label for="bshape_2" class="form-label">BShape 2</label>
+                        {{ form.bshape_2}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="services1_name" class="form-label">Services1 Name</label>
+                        {{ form.services1_name}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="progressbar_1" class="form-label">Progressbar1</label>
+                        {{ form.progressbar_1}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="services2_name" class="form-label">Services2 Name</label>
+                        {{ form.services2_name}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="progressbar_2" class="form-label">Progressbar2</label>
+                        {{ form.progressbar_2}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="services3_name" class="form-label">Services3 Name</label>
+                        {{ form.services3_name}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="progressbar_3" class="form-label">Progressbar3</label>
+                        {{ form.progressbar_3}}
+                      </div>
+                     <div class="col-12">
+                        <label for="status" class="form-label">Status</label>
+                        {{ form.status}}
+                     </div>
+                    <div class="col-12">
+                        {{form.media}}
+                      <button type="submit" class="btn btn-primary">Update</button>
+                      <ul class="errorlist">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <li style="color: red;">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

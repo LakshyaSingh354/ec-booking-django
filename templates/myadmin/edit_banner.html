@@ -1,0 +1,71 @@
+{% extends 'mbase.html' %}
+{% block title %}Banner{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Edit Banner</h6>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'edit_banner'%}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                   <div class="col-md-12">
+                      <label for="banner_name" class="form-label">Banner Name</label>
+                      {{ form.banner_name}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="main_title" class="form-label">Main Title</label>
+                      {{ form.main_title}}
+                    </div>
+                    <div class="col-md-12">
+                      <label for="main_title" class="form-label">Description</label>
+                      {{ form.description}}
+                    </div>
+                      <div class="col-12">
+                        <td><img class="rounded flex-shrink-0" src="{{banner.main_img.url}}" alt="" style="width: 100px; height: auto;"></td>
+                        <br/>
+                        <label for="main_img" class="form-label">Main Image</label>
+                        {{ form.main_img}}
+                      </div>
+                      <div class="col-6">
+                        <td><img class="rounded flex-shrink-0" src="{{banner.img_two.url}}" alt="" style="width: 60px; height: auto;"></td>
+                        <br/>
+                        <label for="main_img" class="form-label">Img two</label>
+                        {{ form.img_two}}
+                      </div>
+                      <div class="col-6">
+                        <td><img class="rounded flex-shrink-0" src="{{banner.img_three.url}}" alt="" style="width: 60px; height: auto;"></td>
+                        <br/>
+                        <label for="img_three" class="form-label">Img Three</label>
+                        {{ form.img_three}}
+                      </div>
+                      <div class="col-6">
+                        <td><img class="rounded flex-shrink-0" src="{{banner.bshape_1.url}}" alt="" style="width: 60px; height: auto;"></td>
+                        <br/>
+                        <label for="bshape_1" class="form-label">BShape 1</label>
+                        {{ form.bshape_1}}
+                      </div>
+                      <div class="col-6">
+                        <td><img class="rounded flex-shrink-0" src="{{banner.bshape_2.url}}" alt="" style="width: 60px; height: auto;"></td>
+                        <br/>
+                        <label for="bshape_2" class="form-label">BShape 2</label>
+                        {{ form.bshape_2}}
+                      </div>
+                     <div class="col-12">
+                        <label for="status" class="form-label">Status</label>
+                        {{ form.status}}
+                     </div>
+                    <div class="col-12">
+                        {{form.media}}
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

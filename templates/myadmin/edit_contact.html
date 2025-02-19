@@ -1,0 +1,78 @@
+{% extends 'mbase.html' %}
+{% block title %}Edit Contact{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Edit Contact Page</h6>
+                {% include 'includes/alerts.html' %}
+                <form class="row g-3 col-xl-9 offset-xl-1" action="{% url 'edit_contact'%}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                   <div class="col-md-6">
+                      <label for="page_name" class="form-label">Page Name</label>
+                      {{ form.page_name}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="get_in_touch_title" class="form-label">Get in Touch Title</label>
+                        {{ form.get_in_touch_title}}
+                      </div>
+                      <div class="col-md-12">
+                        <td><img class="rounded flex-shrink-0" src="{{contact.bg_banner.url}}" alt="" style="width: 200px; height: auto;"></td>
+                        <br/>
+                        <label for="bg_banner" class="form-label">Bg Banner</label>
+                        {{ form.bg_banner}}
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <label for="phone_no1" class="form-label">Phone No1</label>
+                        {{ form.phone_no1}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="phone_no2" class="form-label">Phone No2</label>
+                        {{ form.phone_no2}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="email1" class="form-label">Email1</label>
+                        {{ form.email1}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="email2" class="form-label">Email2</label>
+                        {{ form.email2}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="address1" class="form-label">Address1</label>
+                        {{ form.address1}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="address2" class="form-label">Address2</label>
+                        {{ form.address2}}
+                      </div>
+                      
+                     <div class="col-12">
+                        <label for="status" class="form-label">Status</label>
+                        {{ form.status}}
+                     </div>
+                    <div class="col-12">
+                        {{form.media}}
+                      <button type="submit" class="btn btn-primary">Update</button>
+                      <ul class="errorlist">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <li style="color: red;">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

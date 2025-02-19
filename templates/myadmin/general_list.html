@@ -1,0 +1,96 @@
+{% extends 'mbase.html' %}
+{% block title %}General Settings{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        {% include 'includes/alerts.html' %}
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">General Settings</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Website Logo</th>
+                        <th scope="col">Website Name</th>
+                        <th scope="col">SEO title</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gns in general%}
+                    <tr>
+                        
+                        <td><img class="rounded flex-shrink-0" src="{{gns.logo.url}}" alt="" style="width: 200px; height: auto;"></td>
+                        <td>{{gns.website_name}}</td>
+                        <td>{{gns.seo_title}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_general' gns.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Page Banner</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Banner</th>
+                        <th scope="col">Banner Name</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gns in banner%}
+                    <tr>
+                        
+                        <td><img class="rounded flex-shrink-0" src="{{gns.banner_image.url}}" alt="" style="width: 300px; height: auto;"></td>
+                        <td>{{gns.banner_name}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_banner' gns.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Product List Page Info</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Title</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gns in info%}
+                    <tr>
+                        
+                        <td>{{gns.title}}</td>
+                        <td>{{gns.description|safe|truncatechars:120 }}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_pageinfo' gns.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}    

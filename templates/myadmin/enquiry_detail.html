@@ -1,0 +1,34 @@
+{% extends 'mbase.html' %}
+{% block title %}Enquiry Details{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                
+                {% include 'includes/alerts.html' %}
+                  <div class="col-md-12 col-xl-6 offset-xl-3">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Services Enquiry Details</h6>
+                        <a href="{% url 'enquiry_list' %}" class="btn btn-primary">Back</a>
+                    </div>
+                     <div class="bg-gray px-3 py-3 text">
+                        <h5 class="text-black">Customer Details</h5>
+                        <div class="text-black"><strong>Date Time: </strong>{{enquiry.create_date}}</div>
+                        <div class="text-black"><strong>Customer Name: </strong>{{enquiry.full_name}}</div>
+                        <div class="text-black"><strong>Customer Mobile No: </strong>{{enquiry.phone}}</div>
+                        <div class="text-black"><strong>Customer Email ID: </strong>{{enquiry.email}}</div>
+                        <div class="text-black"><strong>City: </strong>{{enquiry.city}}</div>
+                        <div class="text-black"><strong>Service Name: </strong><a href="/services/{{enquiry.services_url}}/" target="_blank" >{{enquiry.services_title}}</a></div>
+                        <div class="text-black"><strong>Message: </strong>{{enquiry.message}}</div>
+                     </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

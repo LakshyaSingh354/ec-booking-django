@@ -1,0 +1,51 @@
+{% load static %}
+<ul class="navigation">
+    {% if '/' == request.path %}
+    <li class="active"><a href="{% url 'home' %}">Home</a></li>
+    {% else %}
+    <li><a href="{% url 'home' %}">Home</a></li>
+    {% endif %}
+    
+    {% if '/about-us/' == request.path %}
+    <li class="active"><a href="{% url 'about' %}">About Us</a></li>
+    {% else %}
+    <li><a href="{% url 'about' %}">About Us</a></li>
+    {% endif %}
+    
+    {% if '/services/' == request.path %}
+    <li class="menu-item-has-children active"><a href="{% url 'services' %}">Services</a>
+        <ul class="sub-menu">
+            {% for srv in service %}
+                {% if forloop.counter <= 6 %}
+                  <li><a href="{{srv.get_url}}">{{srv.service_name}}</a></li>
+                {%endif%}
+            {% endfor %}
+        </ul>
+    </li>
+    {% else %}
+    <li class="menu-item-has-children"><a href="{% url 'services' %}">Services</a>
+        <ul class="sub-menu">
+            {% for srv in service %}
+                {% if forloop.counter <= 6 %}
+                  <li><a href="{{srv.get_url}}">{{srv.service_name}}</a></li>
+                {%endif%}
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+    {% if '/jobs/' == request.path %}
+    <li class="active"><a href="{% url 'jobpost' %}">Jobs</a></li>
+    {% else %}
+    <li><a href="{% url 'jobpost' %}">Jobs</a></li>
+    {% endif %}
+    {% if '/blog/' == request.path %}
+    <li class="active"><a href="{% url 'post' %}">Blog</a></li>
+    {% else %}
+    <li><a href="{% url 'post' %}">Blog</a></li>
+    {% endif %}
+    {% if '/contact-us/' == request.path %}
+    <li class="active"><a href="{% url 'contact' %}">Contact Us</a></li>
+    {% else %}
+    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+    {% endif %}
+</ul>

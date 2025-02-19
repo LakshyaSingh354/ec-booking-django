@@ -1,0 +1,122 @@
+{% extends 'mbase.html' %}
+{% block title %}Widgets{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Recent Sales Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        {% include 'includes/alerts.html' %}
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Widgets</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Footer Logo</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fbt in footerw1 %}
+                    <tr>
+                        <td><img class="rounded flex-shrink-0" src="{{fbt.footer_Logo.url}}" alt="" style="width: 100px; height: 60px;"></td>
+                        <td>{{fbt.footer_name}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_footerw1' fbt.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- copyright -->
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Footer copyright</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Widgets</th>
+                        <th scope="col">Powered by</th>
+                        <th scope="col">Copyright Logo</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ckt in copyright %}
+                    <tr>
+                        <td>{{ckt.copyright}}</td>
+                        <td>{{ckt.powered_by}}</td>
+                        <td><img class="rounded flex-shrink-0" src="{{ckt.copyright_Logo.url}}" alt="" style="width: 100px; height: 60px;"></td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_copyright' ckt.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Header Top -->
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Header Top Bar</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Type</th>
+                        <th scope="col">GST No</th>
+                        <th scope="col">Phone No</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ckt in topbar %}
+                    <tr>
+                        <td>{{ckt.supplier_type}}</td>
+                        <td>{{ckt.gst_no}}</td>
+                        <td>{{ckt.phone_no}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'edit_header' ckt.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Contact Us -->
+    
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Footer Contact</h6>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Widgets</th>
+                        <th scope="col">Contact Person</th>
+                        <th scope="col">Phone No.</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ckt in contact %}
+                    <tr>
+                        <td>{{ckt.footer_name}}</td>
+                        <td>{{ckt.contact_name}}</td>
+                        <td>{{ckt.phone_no}}</td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'fwcontact' ckt.id%}" onclick="return confirm('Are you sure to edit?')">edit</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<!-- Recent Sales End -->
+{% endblock %}    

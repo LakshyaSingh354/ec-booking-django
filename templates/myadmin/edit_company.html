@@ -1,0 +1,84 @@
+{% extends 'mbase.html' %}
+{% block title %}Edit Company{% endblock %}
+{% load static %}
+{% block content %}  
+<!-- Sale & Revenue Start -->
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-light  rounded h-100 p-4">
+                {% include 'includes/alerts.html' %}
+               
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Edit Company</h6>
+                    <a href="{% url 'company_list' %}" class="btn btn-primary">Back</a>
+                </div>
+                <form class="row g-3 col-xl-10 offset-xl-1" action="{% url 'edit_company' mycompany.id%}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}  
+                    <div class="col-md-6">
+                        <label for="company_name" class="form-label">Company Name</label>
+                        {{ form.company_name}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="company_logo" class="form-label">Company Logo</label>
+                        {{ form.company_logo}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Company Email</label>
+                        {{ form.email}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Company Phone</label>
+                        {{ form.phone}}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="website_url" class="form-label">Company Website url</label>
+                        {{ form.website_url}}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="state" class="form-label">Company Sector</label>
+                        {{ form.sector}}
+                    </div>
+                    <div class="col-md-4">
+                        <label for="country" class="form-label">Company Country</label>
+                        {{ form.country}}
+                    </div>
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">Company state</label>
+                        {{ form.state}}
+                    </div>
+                    <div class="col-md-4">
+                        <label for="city" class="form-label">Company City</label>
+                        {{ form.city}}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="address" class="form-label">Company Address</label>
+                        {{ form.address}}
+                    </div>
+                    <div class="col-md-12">
+                        <label for="state" class="form-label">Status</label>
+                        {{ form.status}}
+                    </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </div>
+                      <ul class="errorlist">
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <li style="color: red;">{{error}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    </form>
+            </div>
+            </div>
+        </div>
+</div>
+<!-- Table End -->
+
+
+{% endblock %}    
