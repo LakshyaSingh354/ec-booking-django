@@ -146,7 +146,7 @@ def blogsearch(request):
   
 
 
-NEXTJS_SERVER = "http://localhost:3000"  # Adjust if necessary
+NEXTJS_SERVER = "https://ec-booking-pink.vercel.app"  # Adjust if necessary
 
 def nextjs_proxy(request, path):
     """ Proxy Next.js static files (CSS, JS, etc.) from .next/static/ through Django """
@@ -170,11 +170,18 @@ def nextjs_proxy(request, path):
 def nextjs_page(request, path):
     """ Proxy Next.js pages (e.g., /events) through Django """
     nextjs_url = f"{NEXTJS_SERVER}/next/{path}"
+    local_url = f"{request.scheme}://{request.get_host()}/next/events"
     print("🔄 Proxying request to:", nextjs_url)
     print("Method:", request.method)
-
     try:
         if request.method == "GET":
+            for i in range(5):
+                test_resp = requests.get(f"{NEXTJS_SERVER}/next/events", stream=True)
+                if test_resp.status_code == 200:
+                    break
+
+                if i == 4:
+                    return HttpResponseNotFound("<h1>Could not call /next/events locally after 5 tries.</h1>")
             response = requests.get(nextjs_url, stream=True)
             if response.status_code == 200:
                 return HttpResponse(
