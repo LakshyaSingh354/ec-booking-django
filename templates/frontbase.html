@@ -19,7 +19,7 @@
   {% if genlt%}
    <link rel="shortcut icon" type="image/x-icon" href="{{genlt.favicon.url}}">                  
    {% else %}
-   <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">                      
+   <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.jpeg' %}">                      
   {% endif %}
   <!-- Place favicon.ico in the root directory -->
   <!-- CSS here -->
@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="{% static 'css/default.css' %}">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   {% block css %}
   {% endblock css %}
 
@@ -80,6 +81,7 @@
     {% block js %}
     {% endblock js %}
         <!-- JS here -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{% static 'js/vendor/jquery-3.6.0.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
@@ -103,4 +105,4 @@
   
   </body>
   
-  </html>    
+  </html>

@@ -7,4 +7,11 @@ PyMySQL==1.1.1
 Pillow==10.0.1
 sqlparse==0.4.4
 typing_extensions==4.8.0
+requests
+fastapi
 tzdata==2023.3
+google-generativeai
+dotenv
+cryptography
+gunicorn
+whitenoise

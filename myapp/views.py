@@ -2,17 +2,21 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 import requests
-from myapp.models import Services,Client,Services_enquiry
+from myapp.models import Products, Services,Client,Services_enquiry
+from django.http import JsonResponse
 from django.contrib import messages,auth
 from django.core.mail import send_mail
 from datetime import datetime
 from django.template.loader import render_to_string
+import google.generativeai as genai
+from myapp.models import ChatMessage
+from chatbot.settings import GENERATIVE_AI_KEY
 # Create your views here.
 
 from accounts.mymail import get_enqmail
 enqmail = get_enqmail()
 
-ALLOWED_HOSTS = ['localhost', 'www.epitomeconsultancy.com', 'epitomeconsultancy.com', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', 'www.epitomeconsultancy.com', 'epitomeconsultancy.com', '127.0.0.1', '.vercel.app']
 NEXTJS_SERVER = "https://ec-booking-pink.vercel.app"
 
 def services(request):
@@ -105,3 +109,43 @@ def nextjs_page(request, path):
         return HttpResponse(response.content, content_type="text/html")
     else:
         return HttpResponseNotFound("<h1>Page Not Found</h1>")
+    
+def send_message(request):
+    if request.method == 'POST':
+        genai.configure(api_key=GENERATIVE_AI_KEY)
+        model = genai.GenerativeModel("gemini-pro")
+
+        user_message = request.POST.get('user_message')
+        bot_response = model.generate_content(user_message)
+
+        ChatMessage.objects.create(user_message=user_message, bot_response=bot_response.text)
+
+        return JsonResponse({
+            'user_message': user_message,
+            'bot_response': bot_response.text
+        })
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+def list_messages(request):
+    messages = ChatMessage.objects.all()
+    return render(request, 'chatbot/list_messages.html', { 'messages': messages })
+
+def products(request):
+    products = Products.objects.filter(status=1).order_by('created_on')
+    brands = Client.objects.filter(status=1).order_by('created_on')
+    paginator = Paginator(products, 8)
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+    context = {
+        'products': paged_products,
+        'brands': brands,
+    }
+    return render(request, 'main/products.html', context)
+
+def product_detail(request, product_slug):
+    single_product = get_object_or_404(Products, slug=product_slug)
+    context = {
+        'single_product': single_product,
+    }
+    return render(request, 'main/product_detail.html', context)

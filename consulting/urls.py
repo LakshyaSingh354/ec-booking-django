@@ -34,6 +34,9 @@ urlpatterns = [
     path('jobs/',include('jobsapp.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     re_path(r'^next/(?P<path>.*)$', views.nextjs_page),
-    re_path(r'^.next/static/(?P<path>.*)$', views.nextjs_proxy)
+    re_path(r'^.next/static/(?P<path>.*)$', views.nextjs_proxy),
+    path('chatbot/', include('chatbotapp.urls')),
+    path('products/', views.products, name='products'),
+    path('product/<slug:product_slug>/', views.product_detail, name='product_detail'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

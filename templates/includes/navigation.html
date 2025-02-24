@@ -33,6 +33,27 @@
         </ul>
     </li>
     {% endif %}
+    {% if '/products/' == request.path %}
+    <li class="menu-item-has-children active">
+        <a href="{% url 'products' %}">Products</a>
+        <ul class="sub-menu">
+            {% for prod in products %}
+            {% if forloop.counter <= 6 %}
+            <li><a href="{{ prod.get_url }}">{{ prod.product_name }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+    {% else %}
+    <li class="menu-item-has-children">
+        <a href="{% url 'products' %}">Products</a>
+        <ul class="sub-menu">
+            {% for product in products %}
+            <li><a href="{{ product.get_url }}">{{ product.product_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
     {% if '/jobs/' == request.path %}
     <li class="active"><a href="{% url 'jobpost' %}">Jobs</a></li>
     {% else %}

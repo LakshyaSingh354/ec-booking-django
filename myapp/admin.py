@@ -13,6 +13,11 @@ class TeamAdmin(admin.ModelAdmin):
     list_display = ('team_name','status')
     prepopulated_fields = {'slug': ('team_name',)}    
 
+class ProductsAdmin(admin.ModelAdmin):
+    list_display = ('product_name', 'created_on', 'status')
+    list_filter = ('status', 'created_on')
+    search_fields = ['product_name', 'description']
+    prepopulated_fields = {'slug': ('product_name',)}
 
 
 
@@ -41,3 +46,4 @@ admin.site.register(Services_enquiry)
 admin.site.register(Home)
 admin.site.register(Counter)
 admin.site.register(Bg_banner)
+admin.site.register(Products, ProductsAdmin)

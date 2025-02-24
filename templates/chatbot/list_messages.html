@@ -1,0 +1,206 @@
+<style>
+.chat-container {
+    position: relative;
+    z-index: 100000;
+    background: #ff0000;
+}
+
+.chat-widget {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    position: fixed;  /* Add fixed positioning */
+    bottom: 80px;    /* Position above the toggle button */
+    right: 20px;     /* Align with toggle button */
+    width: 300px;    /* Set fixed width */
+    z-index: 1000;   /* Ensure it's above other content */
+}
+
+.chat-header {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.messages-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.user-message p {
+    background: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 15px;
+    border-bottom-right-radius: 5px;
+    margin-left: auto;
+    max-width: 80%;
+    float: right;
+    clear: both;
+}
+
+.bot-message p {
+    background: #f0f2f5;
+    color: #000;
+    padding: 8px 12px;
+    border-radius: 15px;
+    border-bottom-left-radius: 5px;
+    margin-right: auto;
+    max-width: 80%;
+    float: left;
+    clear: both;
+}
+
+.chat-input {
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+#chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+#chat-form input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+#chat-form button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.toggle-chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.toggle-chat-btn i {
+    font-size: 24px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+</style>
+
+<div class="chat-container">
+    <div id="chat-widget" class="chat-widget">
+        <div class="chat-header">
+            <h4 style="margin: 0">Chat Support</h4>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+        <div id="messages-list" class="messages-list">
+            {% for message in messages %}
+                <div class="message">
+                    <div class="user-message">
+                        <p>{{ message.user_message }}</p>
+                    </div>
+                    <div class="bot-message">
+                        <p>{{ message.bot_response }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="chat-input">
+            <form id="chat-form" method="POST">
+                {% csrf_token %}
+                <input type="text" name="user_message" placeholder="Type your message..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="toggle-chat" class="toggle-chat-btn">
+        <i class="fas fa-comments"></i>
+    </button>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    const chatWidget = $('#chat-widget');
+    const toggleBtn = $('#toggle-chat');
+    const closeBtn = $('#close-chat');
+
+    $('#messages-list').empty();
+    
+    // Toggle chat widget
+    toggleBtn.on('click', function() {
+        chatWidget.fadeIn();  // Changed to fadeIn for smooth transition
+        toggleBtn.hide();
+        $('#messages-list').scrollTop($('#messages-list')[0].scrollHeight);
+    });
+    
+    // Close chat widget
+    closeBtn.on('click', function() {
+        chatWidget.fadeOut();  // Changed to fadeOut for smooth transition
+        toggleBtn.show();
+    });
+
+    // Handle form submission
+    $('#chat-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        $.ajax({
+            url: '/chatbot/process_message/',
+            type: 'POST',
+            data: $(this).serialize(),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $('#messages-list').append(`
+                        <div class="message">
+                            <div class="user-message">
+                                <p>${response.user_message}</p>
+                            </div>
+                            <div class="bot-message">
+                                <p>${response.bot_response}</p>
+                            </div>
+                        </div>
+                    `);
+                    $('#messages-list').scrollTop($('#messages-list')[0].scrollHeight);
+                    $('input[name="user_message"]').val('');
+                }
+            }
+        });
+    });
+});
+</script>

@@ -14,6 +14,10 @@ from django.contrib import messages,auth
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from accounts.mymail import get_enqmail
+import google.generativeai as genai
+from myapp.models import ChatMessage
+from chatbot.settings import GENERATIVE_AI_KEY
+from chatbotapp.models import ChatMessage
 enqmail = get_enqmail()
 
 from django.views.decorators.csrf import csrf_exempt
@@ -40,6 +44,7 @@ def home(request):
         'posts': posts,
         'home_pages': home_pages,
         'counters': counters,
+        'messages': ChatMessage.objects.all().order_by('-created_at')[:10]  # Show last 10 messages
     }
     
     return render(request, 'main/home.html',context)
@@ -209,3 +214,46 @@ def nextjs_page(request, path):
     except requests.RequestException as e:
         print("❌ Next.js Server Unreachable:", e)
         return HttpResponseNotFound("<h1>Next.js Server Unreachable</h1>")
+    
+
+def send_message(request):
+    if request.method == 'POST':
+        genai.configure(api_key=GENERATIVE_AI_KEY)
+        model = genai.GenerativeModel("gemini-pro")
+
+        user_message = request.POST.get('user_message')
+        bot_response = model.generate_content(user_message)
+
+        ChatMessage.objects.create(user_message=user_message, bot_response=bot_response.text)
+
+        return JsonResponse({
+            'status': 'success',
+            'user_message': request.POST.get('user_message'),
+            'bot_response': bot_response 
+        })
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+def list_messages(request):
+    messages = ChatMessage.objects.all()
+    return render(request, 'chatbot/list_messages.html', { 'messages': messages })
+
+
+def products(request):
+    products = Products.objects.filter(status=1).order_by('created_on')
+    brands = Client.objects.filter(status=1).order_by('created_on')
+    paginator = Paginator(products, 8)
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+    context = {
+        'products': paged_products,
+        'brands': brands,
+    }
+    return render(request, 'main/products.html', context)
+
+def product_detail(request, product_slug):
+    single_product = get_object_or_404(Products, slug=product_slug)
+    context = {
+        'single_product': single_product,
+    }
+    return render(request, 'main/product_detail.html', context)

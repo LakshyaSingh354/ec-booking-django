@@ -3875,6 +3875,7 @@ label {
 	margin-bottom: 30px;
 }
 .services-thumb-two {
+	height: 400px;
 	position: relative;
 	border-radius: 8px;
 	border: 7px solid var(--tg-white);
@@ -3969,6 +3970,7 @@ label {
 	overflow: hidden;
 }
 .services-thumb-three {
+	height: 400px;
 	border-radius: 10px 10px 0 0;
 	overflow: hidden;
 }
@@ -4145,7 +4147,7 @@ label {
 }
 .services-details-thumb img {
     border-radius: 10px;
-    width: 100%;
+    /* width: 100%; */
 }
 .services-details-content .title {
     font-weight: 800;

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import os
+import dotenv
+dotenv.load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure--_vw9o)nsh1j+)vld+ejw5%pt%gad9+92-rg6jx7gy_it+4eyw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.epitomeconsultancy.com','epitomeconsultancy.com', 'localhost']
+ALLOWED_HOSTS = ['*', 'www.epitomeconsultancy.com','epitomeconsultancy.com', 'localhost', '127.0.0.1', '.vercel.app']
 CSP_SCRIPT_SRC = ["'self'", "https://checkout.razorpay.com", "https://api.razorpay.com"]
 CSP_FRAME_SRC = ["'self'", "https://checkout.razorpay.com"]
 CSP_CONNECT_SRC = ["'self'", "https://api.razorpay.com"]
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     # 'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
@@ -55,7 +58,8 @@ INSTALLED_APPS = [
     'blog',
     'jobsapp',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'chatbotapp'
 ]
 
 SITE_ID = 1
@@ -66,6 +70,7 @@ MIDDLEWARE = [
     # 'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -89,6 +94,7 @@ TEMPLATES = [
                 'myapp.context_processors.general_info',
                 'myapp.context_processors.banner_info',
                 'accounts.context_processors.get_user_profile',
+                'myapp.context_processors.product_links',
             ],
         },
     },
@@ -110,11 +116,11 @@ WSGI_APPLICATION = 'consulting.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'advertsneak_epitome',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
 
@@ -191,3 +197,6 @@ EMAIL_PORT = '587'
 #     pass
 
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Collect static here
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
