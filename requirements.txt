@@ -14,4 +14,5 @@ google-generativeai
 dotenv
 cryptography
 gunicorn
+dj_database_url
 whitenoise
