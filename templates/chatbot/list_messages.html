@@ -171,6 +171,14 @@ $(document).ready(function() {
         chatWidget.fadeOut();  // Changed to fadeOut for smooth transition
         toggleBtn.show();
     });
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+
+    // Handle browser back/forward buttons
+    $(window).on('popstate', function() {
+        window.location.reload();
+    });
 
     // Handle form submission
     $('#chat-form').on('submit', function(e) {
