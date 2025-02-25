@@ -1,5 +1,4 @@
 .vercel
-staticfiles/
 __pycache__/
 *.pyc
 .env
