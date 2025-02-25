@@ -851,7 +851,7 @@ CREATE TABLE myapp_client (
 
 
 
-INSERT INTO myapp_client (id, client_name, client_Logo, client_website, created_on, updated_on, status) VALUES
+INSERT INTO myapp_client (id, client_name, "client_Logo", client_website, created_on, updated_on, status) VALUES
 (1, 'Brand 1', 'photos/clients/brand_img01.png', 'https://www.advertsneak.com/', '2023-10-19 04:34:05.000000', '2023-10-19 04:34:27.559966', 1),
 (2, 'Brand 2', 'photos/clients/brand_img02.png', '', '2023-10-19 04:34:29.000000', '2023-10-19 04:34:40.986326', 1),
 (3, 'Brand 3', 'photos/clients/brand_img03.png', '', '2023-10-19 04:34:42.000000', '2023-10-19 04:34:54.392641', 1),
@@ -1158,7 +1158,32 @@ INSERT INTO myapp_feedback (id, full_name, subject, email, phone, message, creat
 (211, 'Merlin AI Boilk', 'Merlin AI – Your Universal Assistant for Work, Study, and Creativity! ???', 'risic1497@gazeta.pl', '83136973368', '- Merlin AI – Your Universal Assistant for Work, Study, and Creativity! ??? \r\n- Merlin is a powerful AI aggregator combining ChatGPT, Claude, DeepSeek, Gemini, Llama, and other top AI models. Now available without VPN for seamless access worldwide! \r\n \r\n-  What Can Merlin AI Do? \r\nText Generation – Create articles, posts, resumes, and marketing materials in seconds! \r\nCode Writing – From simple scripts to complex algorithms, bug fixing, and optimization. \r\nImage Generation – Design unique artwork, logos, and creative concepts. \r\nData Analysis – Structure information, make predictions, and process large datasets. \r\nTranslations & Text Processing – Instant translation into dozens of languages, SEO-friendly text creation. \r\nAI Bot Creation – Develop personalized assistants that handle specific tasks. \r\nBrowser Integration – Instantly analyze web pages and generate content directly in your browser! \r\nhttps://www.getmerlin.in/chat?ref=nwuxm2n \r\n \r\n- Why Choose Merlin? \r\nAll top AI models in one service – ChatGPT, Claude, Gemini, and more. \r\nNo VPN required – Work freely without restrictions or complicated setups. \r\nAffordable access – A fraction of the cost compared to individual AI subscriptions! \r\nConvenient mobile apps – Available on Android and iOS in Russian stores. \r\nFree trial – Message us and try Merlin AI for free! \r\nTry Merlin AI now! Click here and unlock new possibilities with artificial intelligence! ?? \r\n \r\nSign up and get free generations: https://www.getmerlin.in/chat?ref=nwuxm2n \r\n \r\n#MerlinAI #ArtificialIntelligence #AI #ChatGPT #Automation \r\n \r\n \r\n- Merlin AI – Твой универсальный помощник для работы, учебы и творчества! ??? \r\n- Merlin – это мощный агрегатор нейросетей, объединяющий ChatGPT, Claude, DeepSeek, Gemini, Llama и другие топовые AI. Теперь доступ без VPN прямо из России! ???? \r\n- Что умеет Merlin AI? \r\nГенерация текстов – статьи, посты, резюме, рекламные материалы за секунды! \r\nНаписание кода – от простых скриптов до сложных алгоритмов, исправление багов и оптимизация. \r\nГенерация изображений – создавай уникальные арты, логотипы, концепты. \r\nАнализ данных – структурируй информацию, делай прогнозы и анализируй большие объемы данных. \r\nПереводы и работа с текстами – мгновенный перевод на десятки языков, создание SEO-текстов. \r\nСоздание AI-ботов – персонализированные ассистенты, выполняющие нужные задачи. \r\nИнтеграция с браузером – моментальный анализ веб-страниц и генерация контента прямо в браузере! \r\n \r\n- Почему выбирают Merlin? \r\nВсе топовые нейросети в одном сервисе – ChatGPT, Claude, Gemini и другие. \r\nБез VPN – работай без ограничений и сложных настроек. \r\nДоступ в 10 раз дешевле – подписка от 2400 ?/мес вместо сотен долларов! \r\nУдобные приложения – доступно на Android и iOS в российских магазинах. \r\nБесплатный тест – напиши нам и попробуй Merlin AI бесплатно! \r\nПопробуй Merlin AI прямо сейчас! https://www.getmerlin.in/chat?ref=nwuxm2n и открой новые возможности с искусственным интеллектом! ?? \r\n \r\nРегистрация и бесплатные генерации: https://www.getmerlin.in/chat?ref=nwuxm2n \r\n \r\n \r\n \r\nЕсли у вас сложности с оплатой из РФ, то пишите: https://roboex.tilda.ws/ \r\n \r\n#MerlinAI #ИскусственныйИнтеллект #Нейросети #ChatGPT #Автоматизация', '2025-02-17 03:05:50.188666');
 
 
-
+CREATE TABLE myapp_general (
+    id serial PRIMARY KEY,
+    website_name varchar(255),
+    meta_title varchar(255),
+    meta_description text,
+    meta_keywords varchar(255),
+    google_meta_tag varchar(255),
+    website_url varchar(255),
+    favicon varchar(255),
+    logo varchar(255),
+    phone_no1 varchar(255),
+    phone_no2 varchar(255),
+    email1 varchar(255),
+    email2 varchar(255),
+    whatsapp_link varchar(255),
+    address text,
+    facebook_link varchar(255),
+    linkedin_link varchar(255),
+    instagram_link varchar(255),
+    twitter_link varchar(255),
+    youtube_link varchar(255),
+    created_on timestamp,
+    updated_on timestamp,
+    status integer,
+    footer_logo varchar(255)
+);
 
 INSERT INTO myapp_general (id, website_name, meta_title, meta_description, meta_keywords, google_meta_tag, website_url, favicon, logo, phone_no1, phone_no2, email1, email2, whatsapp_link, address, facebook_link, linkedin_link, instagram_link, twitter_link, youtube_link, created_on, updated_on, status, footer_logo) VALUES
 (1, 'Epitome Consultancy', 'Epitome Consultancy', 'Morem ipsum dolor sit amet consectetur adipiscing elita florai psum dolor sit amet consecteture Borem ipsum dolor sitter consectetur adipiscing elita florai rem ipsum dolor sit amet consectetu.', 'AdvertSneak Technologies', 'eertt5', 'https://www.advertsneak.com', 'favicon/logo.png', 'logo/logo.png', '7977515433', '917977515433', 'info@advertsneak.com', '', '', 'Veena Nagar, Mulund (w), <br>Mumbai, Maharashtra', '', '', '', '', '', '2023-10-21 06:14:07.000000', '2023-12-01 05:55:26.475699', 1, 'logo/logo_tZkbe92.png');
@@ -1170,6 +1195,30 @@ INSERT INTO myapp_general (id, website_name, meta_title, meta_description, meta_
 INSERT INTO myapp_home (id, page_name, meta_title, meta_description, meta_keywords, brand_title, section1_subtitle, section1_title, section5_subtitle, section5_title, section5_button, team_subtitle, team_title, team_description, testimonial_img, blog_subtitle, blog_title, blog_description, created_on, updated_on, status) VALUES
 (1, 'Home', 'Home Page Meta Tag', 'Home Page', 'Home Page', 'Trusted by 10,000+ companies around the world', 'What We Do For You', 'The features that make our Service unique', 'Complete Projects', 'A Complete Solution For Global Business', 'See All Projects', 'Expert People', 'Dedicated Team Members', 'Ever find yourself staring at your computer screen a good consulting slogan to come to mind? Oftentimes.', 'testimonial/h3_testimonial_img5.jpg', 'NEWS & BLOGS', 'Read Our Latest Updates', 'Ever find yourself staring at your computer screen a good consulting slogan to come to mind? Oftentimes.', '2023-10-23 09:35:17.000000', '2023-12-04 05:38:50.556659', 1);
 
+
+CREATE TABLE myapp_know_us (
+    id serial PRIMARY KEY,
+    heading_name varchar(255),
+    main_title varchar(255),
+    description text,
+    mask_img varchar(255),
+    flaticon_class varchar(255),
+    img_two varchar(255),
+    bshape_1 varchar(255),
+    bshape_2 varchar(255),
+    bshape_3 varchar(255),
+    services1_name varchar(255),
+    services1_thumb varchar(255),
+    services1_flaticon varchar(255),
+    services1_content text,
+    services2_name varchar(255),
+    services2_thumb varchar(255),
+    services2_flaticon varchar(255),
+    services2_content text,
+    created_on timestamp,
+    updated_on timestamp,
+    status integer
+);
 
 INSERT INTO myapp_know_us (id, heading_name, main_title, description, mask_img, flaticon_class, img_two, bshape_1, bshape_2, bshape_3, services1_name, services1_thumb, services1_flaticon, services1_content, services2_name, services2_thumb, services2_flaticon, services2_content, created_on, updated_on, status) VALUES
 (1, 'GET TO KNOW US', 'We are the next gen Business experience', '<p>With over 25 years of experience, we have crafted thousands of Strategic discovery process that enables us to peelback thousands which enable us to understand.</p>', 'home/2023/12/04/about_epitomeconsultancy2.jpg', 'flaticon-business-presentation', 'home/2023/10/21/h3_about_img02.jpg', 'home/2023/10/21/h3_about_shape01.png', 'home/2023/10/21/h3_about_shape02.png', 'home/2023/10/21/h3_about_shape03.png', 'Business Growth', '', 'flaticon-profit', 'eiusmod temporincididunt ut labore magna aliqua Quisery.', 'Target Audience', '', 'flaticon-mission', 'eiusmod temporincididunt ut labore magna aliqua Quisery.', '2023-10-21 09:27:59.000000', '2023-12-04 05:15:26.501130', 1);
