@@ -839,7 +839,15 @@ INSERT INTO myapp_bg_banner (id, name, bg_banner, title, created_on, updated_on,
 
 
 
-
+CREATE TABLE myapp_client (
+  id bigint NOT NULL,
+  client_name VARCHAR(100) NOT NULL,
+  client_Logo VARCHAR(100) NOT NULL,
+  client_website VARCHAR(100) NOT NULL,
+  created_on TIMESTAMP(6) NOT NULL,
+  updated_on TIMESTAMP(6) NOT NULL,
+  status int NOT NULL
+);
 
 
 
