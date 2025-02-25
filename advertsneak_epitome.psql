@@ -507,7 +507,11 @@ INSERT INTO django_admin_log (id, action_time, object_id, object_repr, action_fl
 (418, '2023-12-09 09:41:58.473274', '2', 'smtp.gmail.com', 2, '[]', 47, 1);
 
 
-
+CREATE TABLE django_content_type (
+    id integer PRIMARY KEY,
+    app_label varchar(100) NOT NULL,
+    model varchar(100) NOT NULL
+);
 
 INSERT INTO django_content_type (id, app_label, model) VALUES
 (8, 'accounts', 'author'),
