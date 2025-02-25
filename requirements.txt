@@ -15,4 +15,5 @@ dotenv
 cryptography
 gunicorn
 dj_database_url
+psycopg2
 whitenoise
