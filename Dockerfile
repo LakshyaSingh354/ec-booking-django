@@ -21,7 +21,8 @@ RUN apt-get update && \
     default-libmysqlclient-dev \
     python3-dev \
     build-essential \
-    netcat-traditional && \
+    netcat-traditional \
+    default-mysql-client && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p /app/media /app/static && \
     chown -R appuser:appuser /app
@@ -39,13 +40,15 @@ COPY --chown=appuser:appuser .env /app/
 
 # Create startup script
 COPY --chown=appuser:appuser docker-entrypoint.sh /app/
+COPY --chown=appuser:appuser advertsneak_epitome.sql /app/
+
 RUN chmod +x /app/docker-entrypoint.sh
 
 # Expose port
-EXPOSE 8000
+EXPOSE 80
 
 # Set entrypoint
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
 # Default command
-CMD ["gunicorn", "consulting.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "consulting.wsgi:application", "--bind", "0.0.0.0:80"]

@@ -3,24 +3,28 @@ services:
     build: .
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_NAME=advertsneak_epitome  
-      - DATABASE_USER=advertsneak_user  # Changed from root
-      - DATABASE_PASSWORD=password123      
-      - DATABASE_HOST=db                  
-      - DATABASE_PORT=3306
-
     depends_on:
       - db
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=3306
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=advertsneak_epitome
 
   db:
-    image: mysql:8.0 
+    image: mysql:8.0
+    restart: always
     environment:
+      - MYSQL_ROOT_PASSWORD=root_password
       - MYSQL_DATABASE=advertsneak_epitome
-      - MYSQL_USER=advertsneak_user       # New user
-      - MYSQL_PASSWORD=password123         
-      - MYSQL_ROOT_PASSWORD=password123 
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --init-file /docker-entrypoint-initdb.d/init.sql
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysql_data:/var/lib/mysql
 
 volumes:
