@@ -16,11 +16,11 @@
   <meta property="og:description" content="{{genlt.meta_description}}" /> 
   <meta name="robots" content="INDEX,FOLLOW">
   <!-- Favicons -->
-  {% if genlt%}
-   <link rel="shortcut icon" type="image/x-icon" href="{{genlt.favicon.url}}">                  
-   {% else %}
-   <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.jpeg' %}">                      
-  {% endif %}
+  {% if genlt %}
+        <link rel="shortcut icon" type="image/x-icon" href="{{ genlt.favicon.url }}">
+    {% else %}
+        <link rel="shortcut icon" type="image/x-icon" href="media/favicon/logo.png">
+    {% endif %}
   <!-- Place favicon.ico in the root directory -->
   <!-- CSS here -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
